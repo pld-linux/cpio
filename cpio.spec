@@ -94,7 +94,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README
-%attr(755,root,root) /bin/*
+%attr(755,root,root) /bin/cpio
 /usr/info/cpio*
 /usr/man/man1/*
 
