@@ -26,6 +26,7 @@ Patch6:		%{name}-man.patch
 Patch7:		%{name}-freebsd.patch
 Patch8:		%{name}-pmake.patch
 BuildRequires:	autoconf
+BuildRequires:	texinfo
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_exec_prefix	/
