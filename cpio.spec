@@ -1,11 +1,13 @@
 Summary:	GNU cpio archiving program
 Summary(de):	GNU-cpio-Archivierungsprogramm 
+Summary(es): Programa de empaquetado cpio de la GNU (usado por el utilitario rpm)
 Summary(fr):	Programme d'archivage cpio de GNU
 Summary(pl):	Program archwizuj±cy na licencji GNU
+Summary(pt_BR): Programa de empacotamento cpio da GNU (usado pelo utilitário rpm)
 Summary(tr):	GNU cpio arþivleme programý
 Name:		cpio
 Version:	2.4.2
-Release:	23
+Release:	25
 License:	GPL
 Group:		Applications/Archiving
 Group(de):	Applikationen/Archivierung
@@ -23,6 +25,8 @@ Patch8:		%{name}-emptylink.patch
 Patch9:		%{name}-errorcode.patch
 Patch10:	%{name}-gethostname_is_in_libc_aka_no_libnsl.patch
 Patch11:	%{name}-man.patch
+Patch12:	%{name}-debian36.patch
+patch13:	%{name}-freebsd.patch
 BuildRequires:	autoconf
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -54,6 +58,13 @@ kompatibel sind. Beim Extrahieren von Dateien aus Archiven erkennt
 cpio das Format automatisch, es kann auch Archive lesen, die auf
 Computern mit anderer Byteordnung erzeugt wurden.
 
+%description -l pt_BR
+cpio copia arquivos para dentro ou para fora ou de um "archive"
+cpio ou tar, que é um arquivo que contém outros arquivos mais
+informações sobre eles, como o seu nome de arquivo, dono e permissões
+de acesso. O "archive" pode ser outro arquivo no disco, uma fita
+magnética ou um pipe. cpio possui três modos de operação.
+
 %description -l fr
 cpio copie des fichiers dans ou à partir d'une archive tar ou cpio,
 qui est un fichier contenant d'autres fichiers plus des informations
@@ -67,6 +78,13 @@ pojedynczym zbiorem zawieraj±cym pozosta³e pliki wraz z dodatkowymi
 informacjami jak np. nazwa, w³a¶ciciel, czas modyfikacji i prawa
 dostêpu. Archiwum mo¿e byæ plikiem na dysku, ta¶mie magetycznej, albo
 potokiem.
+
+%description -l es
+cpio copia archivos para dentro o para fuera, o de un "archive"
+cpio o tar, que es un archivo que contiene otros archivos,
+más información sobre ellos, como su nombre de archivo, dueño y
+permisos de acceso. "archive" puede ser otro archivo en el disco,
+una cinta magnética o un pipe. cpio posee tres modos de operación.
 
 %description -l tr
 cpio programý, cpio veya tar arþivlerinden dosya çeker ya da bu
@@ -89,6 +107,8 @@ teyp veya bir pipe olabilir.
 %patch9 -p1
 %patch10 -p1
 %patch11 -p1
+%patch12 -p1
+%patch13 -p1
 chmod -R a+Xr,u+Xw .
 
 %build
