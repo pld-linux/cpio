@@ -12,7 +12,7 @@ Version:	2.5
 Release:	1
 License:	GPL v2+
 Group:		Applications/Archiving
-Source0:	ftp://prep.ai.mit.edu/pub/gnu/cpio/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.gnu.org/pub/gnu/cpio/%{name}-%{version}.tar.gz
 Source1:	%{name}-non-english-man-pages.tar.bz2
 Patch0:		%{name}-mtime.patch
 Patch1:		%{name}-svr4compat.patch
