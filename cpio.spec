@@ -5,7 +5,7 @@ Summary(pl):	Program archwizuj±cy na licencji GNU
 Summary(tr):	GNU cpio arþivleme programý
 Name:		cpio
 Version:	2.4.2
-Release:	22
+Release:	23
 License:	GPL
 Group:		Applications/Archiving
 Group(de):	Applikationen/Archivierung
