@@ -10,7 +10,7 @@ diff -Nru cpio-2.4.2/cpio.texi cpio-2.4.2.new/cpio.texi
 -END-INFO-DIR-ENTRY
 +@dircategory File utilities:
 +@direntry
-+* cpio: (cpio)				Making tape (or disk) archives.
++* cpio: (cpio).				Making tape (or disk) archives.
 +@end direntry
  @end format
  @end ifinfo
