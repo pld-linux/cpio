@@ -5,7 +5,7 @@ Summary(pl):	Program archwizuj±cy na licencji GNU
 Summary(tr):	GNU cpio arþivleme programý
 Name:		cpio
 Version:	2.4.2
-Release:	15
+Release:	16
 Copyright:	GPL
 Group:		Utilities/Archiving
 Group(pl):	Narzêdzia/Archiwizacja
@@ -16,7 +16,6 @@ Patch2:		cpio-svr4compat.patch
 Patch3:		cpio-info.patch
 Patch4:		cpio-glibc21.patch
 Patch5:		cpio-longlongdev.patch
-Prereq:		/sbin/install-info
 Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
@@ -67,10 +66,10 @@ disk üzerinde baþka bir dosya, manyetik bir teyp veya bir pipe olabilir.
 chmod u+w configure
 autoconf
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
-./configure %{_target} \
+    ./configure \
 	--prefix=%{_prefix} \
 	--bindir=/bin \
-	--libexecdir=/sbin
+	--libexecdir=/sbin %{_target_platform}
 make
 
 %install
