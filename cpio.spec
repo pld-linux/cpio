@@ -5,7 +5,7 @@ Summary(pl):	Program archwizuj±cy na licencji GNU
 Summary(tr):	GNU cpio arþivleme programý
 Name:		cpio
 Version:	2.4.2
-Release:	20
+Release:	21
 License:	GPL
 Group:		Utilities/Archiving
 Group(pl):	Narzêdzia/Archiwizacja
@@ -39,14 +39,12 @@ extracting files from archives, cpio automatically recognizes which
 kind of archive it is reading and can read archives created on
 machines with a different byte-order.
 
-Install cpio if you need a program to manage file archives.
-
 %description -l de
 GNU cpio kopiert Dateien in oder aus einem CPIO- oder Tar-Archiv.
 Archive sind Dateien, die eine Sammlung anderer Dateien und
 informationen über sie, wie Dateiname, Besitzer, Zugriffszeiten und
--berechtigungen, enthalten. Das Archiv kann eine andere Datei auf der
-Festplatte sein, oder ein Streamerband, oder ein pipe. GNU cpio
+-berechtigungen, enthalten. Das Archiv kann eine andere Datei auf
+der Festplatte sein, oder ein Streamerband, oder ein pipe. GNU cpio
 unterstützt die archiv-Formate binary, old ASCII, new ASCII, crc, HPUX
 binary, HPUX old ASCII, old tar und POSIX.1 tar. Standardmäßig erzeugt
 cpio Archive im binary-Format, so daß sie mit älteren cpio-Programmen
