@@ -9,7 +9,7 @@ Release:	13
 Copyright:	GPL
 Group:		Utilities/Archiving
 Group(pl):	Narzêdzia/Archiwizacja
-Source:		ftp://prep.ai.mit.edu/pub/gnu/%{name}-%{version}.tar.gz
+Source:		ftp://prep.ai.mit.edu/pub/gnu/cpio/%{name}-%{version}.tar.gz
 Patch0:		cpio-glibc.patch
 Patch1:		cpio-mtime.patch
 Patch2:		cpio-svr4compat.patch
