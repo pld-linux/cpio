@@ -1,20 +1,21 @@
-Summary:     GNU cpio archiving program
-Summary(de): GNU-cpio-Archivierungsprogramm 
-Summary(fr): Programme d'archivage cpio de GNU
-Summary(pl): Program archwizuj±cy na licencji GNU
-Summary(tr): GNU cpio arþivleme programý
-Name:        cpio
-Version:     2.4.2
-Release:     11
-Copyright:   GPL
-Group:       Utilities/Archiving
-Source:      ftp://prep.ai.mit.edu/pub/gnu/%{name}-%{version}.tar.gz
-Patch0:      cpio-glibc.patch
-Patch1:      cpio-mtime.patch
-Patch2:      cpio-svr4compat.patch
-Patch3:      cpio-info.patch
-Prereq:      /sbin/install-info
-Buildroot:   /tmp/%{name}-%{version}-root
+Summary:	GNU cpio archiving program
+Summary(de):	GNU-cpio-Archivierungsprogramm 
+Summary(fr):	Programme d'archivage cpio de GNU
+Summary(pl):	Program archwizuj±cy na licencji GNU
+Summary(tr):	GNU cpio arþivleme programý
+Name:		cpio
+Version:	2.4.2
+Release:	12
+Copyright:	GPL
+Group:		Utilities/Archiving
+Group(pl):	Narzêdzia/Archiwizacja
+Source:		ftp://prep.ai.mit.edu/pub/gnu/%{name}-%{version}.tar.gz
+Patch0:		cpio-glibc.patch
+Patch1:		cpio-mtime.patch
+Patch2:		cpio-svr4compat.patch
+Patch3:		cpio-info.patch
+Prereq:		/sbin/install-info
+Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
 cpio copies files into or out of a cpio or tar archive, which is a
@@ -80,7 +81,7 @@ gzip -9nf $RPM_BUILD_ROOT/usr/{info/cpio*,man/man1/*}
 /sbin/install-info /usr/info/cpio.info.gz /etc/info-dir
 
 %preun
-if [ $1 = 0 ]; then
+if [ "$1" = "0" ]; then
 	/sbin/install-info --delete /usr/info/cpio.info.gz /etc/info-dir
 fi
 
@@ -88,13 +89,17 @@ fi
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%defattr(644, root, root, 755)
+%defattr(644,root,root,755)
 %doc README
-%attr(755, root, root) /bin/*
+%attr(755,root,root) /bin/*
 /usr/info/cpio*
-%attr(644, root,  man) /usr/man/man1/*
+/usr/man/man1/*
 
 %changelog
+* Thu Mar 11 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [2.4.2-12]
+- removed man group from man pages.
+
 * Tue Jan 26 1999 Micha³ Kuratczyk <kurkens@polbox.com>
 - added "Group(pl)"
 - cosmetics changes in %files
