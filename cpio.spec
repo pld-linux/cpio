@@ -16,7 +16,11 @@ Patch2:		cpio-svr4compat.patch
 Patch3:		cpio-info.patch
 Patch4:		cpio-glibc21.patch
 Patch5:		cpio-longlongdev.patch
+Patch6:		cpio-DESTDIR.patch
+Prereq:		/sbin/install-info
 Buildroot:	/tmp/%{name}-%{version}-root
+
+%define		_exec_prefix	/
 
 %description
 cpio copies files into or out of a cpio or tar archive, which is a
@@ -61,24 +65,19 @@ disk üzerinde baþka bir dosya, manyetik bir teyp veya bir pipe olabilir.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 %build
-chmod u+w configure
-autoconf
-CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
-    ./configure \
-	--prefix=%{_prefix} \
-	--bindir=/bin \
-	--libexecdir=/sbin %{_target_platform}
+LDFLAGS="-s"; export LDFLAGS 
+%configure 
+
 make
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 make install \
-	prefix=$RPM_BUILD_ROOT%{_prefix} \
-	bindir=$RPM_BUILD_ROOT/bin \
-	libexecdir=$RPM_BUILD_ROOT/sbin
+	DESTDIR=$RPM_BUILD_ROOT 
 	
 gzip -9nf $RPM_BUILD_ROOT{%{_infodir}/cpio*,%{_mandir}/man1/*} \
 	README
@@ -99,7 +98,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc README.gz
 %attr(755,root,root) /bin/cpio
 %{_infodir}/cpio*
-%{_mandir}/man1/*
+%{_mandir}/man1/cpio.*
 
 %changelog
 * Sat May 29 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
