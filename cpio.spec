@@ -7,7 +7,7 @@ Summary(pt_BR): Programa de empacotamento cpio da GNU (usado pelo utilitário rpm
 Summary(tr):	GNU cpio arþivleme programý
 Name:		cpio
 Version:	2.4.2
-Release:	25
+Release:	26
 License:	GPL
 Group:		Applications/Archiving
 Group(de):	Applikationen/Archivierung
@@ -20,7 +20,6 @@ Patch3:		%{name}-info.patch
 Patch4:		%{name}-glibc21.patch
 Patch5:		%{name}-longlongdev.patch
 Patch6:		%{name}-DESTDIR.patch
-Patch7:		%{name}-stdout.patch
 Patch8:		%{name}-emptylink.patch
 Patch9:		%{name}-errorcode.patch
 Patch10:	%{name}-gethostname_is_in_libc_aka_no_libnsl.patch
@@ -102,7 +101,6 @@ teyp veya bir pipe olabilir.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
-%patch7 -p1
 %patch8 -p1
 %patch9 -p1
 %patch10 -p1
