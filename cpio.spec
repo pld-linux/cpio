@@ -1,5 +1,5 @@
 Summary:	GNU cpio archiving program
-Summary(de):	GNU-cpio-Archivierungsprogramm 
+Summary(de):	GNU-cpio-Archivierungsprogramm
 Summary(es):	Programa de empaquetado cpio de la GNU (usado por el utilitario rpm)
 Summary(fr):	Programme d'archivage cpio de GNU
 Summary(pl):	Program archwizuj±cy na licencji GNU
@@ -46,8 +46,8 @@ machines with a different byte-order.
 %description -l de
 GNU cpio kopiert Dateien in oder aus einem CPIO- oder Tar-Archiv.
 Archive sind Dateien, die eine Sammlung anderer Dateien und
-informationen über sie, wie Dateiname, Besitzer, Zugriffszeiten und
--berechtigungen, enthalten. Das Archiv kann eine andere Datei auf
+informationen über sie, wie Dateiname, Besitzer, Zugriffszeiten
+und -berechtigungen, enthalten. Das Archiv kann eine andere Datei auf
 der Festplatte sein, oder ein Streamerband, oder ein pipe. GNU cpio
 unterstützt die archiv-Formate binary, old ASCII, new ASCII, crc, HPUX
 binary, HPUX old ASCII, old tar und POSIX.1 tar. Standardmäßig erzeugt
@@ -111,15 +111,15 @@ chmod -R a+Xr,u+Xw .
 
 %build
 autoconf
-%configure 
+%configure
 
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install DESTDIR=$RPM_BUILD_ROOT 
-	
+%{__make} install DESTDIR=$RPM_BUILD_ROOT
+
 gzip -9nf README
 
 %post
