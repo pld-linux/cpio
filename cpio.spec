@@ -17,6 +17,7 @@ Patch3:		cpio-info.patch
 Patch4:		cpio-glibc21.patch
 Prereq:		/sbin/install-info
 Buildroot:	/tmp/%{name}-%{version}-root
+Conflicts:	glibc <= 2.0.7
 
 %description
 cpio copies files into or out of a cpio or tar archive, which is a
@@ -100,6 +101,8 @@ rm -rf $RPM_BUILD_ROOT
 %changelog
 * Thu Mar 11 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [2.4.2-12]
+- added "Conflicts: glibc <= 2.0.7" for installing cpio in proper enviroment,
+- added cpio-glibc21.patch,
 - removed man group from man pages.
 
 * Tue Jan 26 1999 Micha³ Kuratczyk <kurkens@polbox.com>
