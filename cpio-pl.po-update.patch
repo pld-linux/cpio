@@ -1,0 +1,926 @@
+--- cpio-2.6/po/pl.po.orig	2004-12-20 16:42:05.000000000 +0100
++++ cpio-2.6/po/pl.po	2005-01-09 15:01:03.130067392 +0100
+@@ -1,25 +1,30 @@
+ # Polish translation for the GNU cpio.
+ # Copyright (C) 1996 Free Software Foundation, Inc.
++# This file is distributed under the same license as the cpio package.
+ # Pawe³ Krawczyk <kravietz@pipeta.chemia.pk.edu.pl>, 1996.
++# Jakub Bogusz <qboosh@pld-linux.org>, 2005.
+ #
+ msgid ""
+ msgstr ""
+-"Project-Id-Version: cpio 2.3.911\n"
++"Project-Id-Version: cpio 2.6\n"
+ "Report-Msgid-Bugs-To: bug-cpio@gnu.org\n"
+ "POT-Creation-Date: 2004-12-20 17:41+0200\n"
+-"PO-Revision-Date: 1996-08-27 21:45\n"
++"PO-Revision-Date: 2005-01-09 11:40+0100\n"
+ "Last-Translator: Pawe³ Krawczyk <kravietz@pipeta.chemia.pk.edu.pl>\n"
+ "Language-Team: Polish <pl@li.org>\n"
+ "MIME-Version: 1.0\n"
+ "Content-Type: text/plain; charset=ISO-8859-2\n"
+ "Content-Transfer-Encoding: 8-bit\n"
++"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
++"|| n%100>=20) ? 1 : 2);\n"
+ 
+ #: src/copyin.c:43
+-#, fuzzy, c-format
++#, c-format
+ msgid "warning: skipped %ld byte of junk"
+ msgid_plural "warning: skipped %ld bytes of junk"
+-msgstr[0] "uwaga: omijam %ld bajtów ¶miecia"
+-msgstr[1] "uwaga: omijam %ld bajtów ¶miecia"
++msgstr[0] "uwaga: pominiêto %ld bajt ¶mieci"
++msgstr[1] "uwaga: pominiêto %ld bajty ¶mieci"
++msgstr[2] "uwaga: pominiêto %ld bajtów ¶mieci"
+ 
+ #: src/copyin.c:64
+ #, c-format
+@@ -76,14 +81,15 @@
+ 
+ #: src/copyin.c:1400
+ msgid "standard input is closed"
+-msgstr "wej¶cie standardowe (stdin) zamkniête"
++msgstr "standardowe wej¶cie (stdin) jest zamkniête"
+ 
+ #: src/copyin.c:1585 src/copyout.c:799 src/copypass.c:403
+-#, fuzzy, c-format
++#, c-format
+ msgid "%d block\n"
+ msgid_plural "%d blocks\n"
+-msgstr[0] "%d bloków\n"
+-msgstr[1] "%d bloków\n"
++msgstr[0] "%d blok\n"
++msgstr[1] "%d bloki\n"
++msgstr[2] "%d bloków\n"
+ 
+ #: src/copyout.c:48 src/copyout.c:57
+ #, c-format
+@@ -130,278 +136,296 @@
+ "  # Copy files named in name-list to destination-directory\n"
+ "  cpio -p destination-directory < name-list\n"
+ msgstr ""
++"GNU `cpio' kopiuje pliki do i z archiwów\n"
++"\n"
++"Przyk³ady:\n"
++"  # Skopiowanie plików o nazwach z pliku lista-nazw do archiwum\n"
++"  cpio -o < lista-nazw [> archiwum]\n"
++"  # Wydobycie plików z archiwum\n"
++"  cpio -i [< archiwum]\n"
++"  # Skopiowanie plików o nazwach z pliku lista-nazw do katalogu-docelowego\n"
++"  cpio -p katalog-docelowy < lista-nazw\n"
+ 
+ #: src/main.c:76
+ #, c-format
+ msgid "%s is meaningless with %s"
+-msgstr ""
++msgstr "%s nie ma znaczenia przy %s"
+ 
+ #: src/main.c:80
+-#, fuzzy
+ msgid "Main operation mode:"
+-msgstr "operacja na ta¶mie"
++msgstr "G³ówny tryb operacji:"
+ 
+ #: src/main.c:82
+ msgid "Create the archive (run in copy-out mode)"
+-msgstr ""
++msgstr "Tworzenie archiwum (dzia³anie w trybie copy-out)"
+ 
+ #: src/main.c:84
+ msgid "Extract files from an archive (run in copy-in mode)"
+-msgstr ""
++msgstr "Wydobywanie plików z archiwum (dzia³anie w trybie copy-in)"
+ 
+ #: src/main.c:86
+ msgid "Run in copy-pass mode"
+-msgstr ""
++msgstr "Dzia³anie w trybie copy-pass"
+ 
+ #: src/main.c:88
+ msgid "Print a table of contents of the input"
+-msgstr ""
++msgstr "Wypisanie tabeli z zawarto¶ci± wej¶cia"
+ 
+ #: src/main.c:91
+ msgid "Operation modifiers valid in any mode:"
+-msgstr ""
++msgstr "Modyfikatory operacji poprawne w ka¿dym trybie:"
+ 
+ #: src/main.c:93 src/main.c:158 src/main.c:172
+ msgid "[[USER@]HOST:]FILE-NAME"
+-msgstr ""
++msgstr "[[U¯YTKOWNIK@]HOST:]PLIK"
+ 
+ #: src/main.c:94
+ msgid ""
+ "Use this FILE-NAME instead of standard input or output. Optional USER and "
+ "HOST specify the user and host names in case of a remote archive"
+ msgstr ""
++"U¿ycie tego PLIKU zamiast standardowego wej¶cia lub wyj¶cia. Opcjonalne U¯YTKOWNIK i HOST okre¶laj± nazwy u¿ytkownika i hosta w przypadku zdalnego archiwum"
+ 
+ #: src/main.c:96
+ msgid "Archive file is local, even if its name contains colons"
+-msgstr ""
++msgstr "Plik archiwum jest lokalny, nawet je¶li nazwa zawiera dwukropki"
+ 
+ #: src/main.c:97
+ msgid "FORMAT"
+-msgstr ""
++msgstr "FORMAT"
+ 
+ #: src/main.c:98
+ msgid "Use given archive FORMAT"
+-msgstr ""
++msgstr "U¿ycie podanego FORMATU archiwum"
+ 
+ #: src/main.c:100
+ msgid "Set the I/O block size to 5120 bytes"
+-msgstr ""
++msgstr "Ustawienie rozmiaru bloku we/wy na 5120 bajtów"
+ 
+ #: src/main.c:101
+ msgid "BLOCK-SIZE"
+-msgstr ""
++msgstr "ROZMIAR-BLOKU"
+ 
+ #: src/main.c:102
+ msgid "Set the I/O block size to BLOCK-SIZE * 512 bytes"
+-msgstr ""
++msgstr "Ustawienie rozmiaru bloku we/wy na ROZMIAR_BLOKU * 512 bajtów"
+ 
+ #: src/main.c:104
+ msgid "Use the old portable (ASCII) archive format"
+-msgstr ""
++msgstr "U¿ycie starego przeno¶nego (ASCII) formatu archiwum"
+ 
+ #: src/main.c:106
+ msgid "Print a \".\" for each file processed"
+-msgstr ""
++msgstr "Wypisanie \".\" dla ka¿dego przetworzonego pliku"
+ 
+ #: src/main.c:107
+ msgid "NUMBER"
+-msgstr ""
++msgstr "LICZBA"
+ 
+ #: src/main.c:108
+ msgid "Set the I/O block size to the given NUMBER of bytes"
+-msgstr ""
++msgstr "Ustawienie rozmiaru bloku we/wy na podan± LICZBÊ bajtów"
+ 
+ #: src/main.c:109
+ msgid "STRING"
+-msgstr ""
++msgstr "£AÑCUCH"
+ 
+ #: src/main.c:110
+ msgid "Print STRING when the end of a volume of the backup media is reached"
+-msgstr ""
++msgstr "Wypisanie £AÑCUCHA po osi±gniêciu koñca woluminu no¶nika"
+ 
+ #: src/main.c:113
+ msgid "Only copy files that do not match any of the given patterns"
+-msgstr ""
++msgstr "Kopiowanie wy³±cznie plików nie pasuj±cych do podanych wzorców"
+ 
+ #: src/main.c:115
+ msgid "In the verbose table of contents listing, show numeric UID and GID"
+-msgstr ""
++msgstr "W tabeli szczegó³owej spisu zawarto¶ci pokazywanie liczbowych warto¶ci UID i GID"
+ 
+ #: src/main.c:117
+ msgid "COMMAND"
+-msgstr ""
++msgstr "POLECENIE"
+ 
+ #: src/main.c:118
+ msgid "Use remote COMMAND instead of rsh"
+-msgstr ""
++msgstr "U¿ycie zdalnego POLECENIA zamiast rsh"
+ 
+ #: src/main.c:120
+ msgid "Do not print the number of blocks copied"
+-msgstr ""
++msgstr "Nie wypisywanie liczby skopiowanych bloków"
+ 
+ #: src/main.c:122
+ msgid "Verbosely list the files processed"
+-msgstr ""
++msgstr "Szczegó³owe podawanie przetworzonych plików"
+ 
+ #: src/main.c:125
+ msgid "Enable debugging info"
+-msgstr ""
++msgstr "W³±czenie informacji diagnostycznych"
+ 
+ #: src/main.c:127
+ msgid "FLAG"
+-msgstr ""
++msgstr "FLAGA"
+ 
+ #: src/main.c:128
+ msgid ""
+ "Control warning display. Currently FLAG is one of 'none', 'truncate', 'all'. "
+ "Multiple options accumulate."
+ msgstr ""
++"Sterowanie wy¶wietlaniem ostrze¿eñ. Aktualnie FLAGA to jedno z 'none', 'truncate', 'all'. Opcje podane razem ³±cz± siê."
+ 
+ #: src/main.c:132
+ msgid "Operation modifiers valid only in copy-in mode:"
+-msgstr ""
++msgstr "Modyfikatory operacji poprawne tylko w trybie copy-in:"
+ 
+ #: src/main.c:133 src/main.c:141
+ msgid "FILE"
+-msgstr ""
++msgstr "PLIK"
+ 
+ #: src/main.c:134
+ msgid ""
+ "In copy-in mode, read additional patterns specifying filenames to extract or "
+ "list from FILE"
+ msgstr ""
++"W trybie copy-in czytanie z PLIKU dodatkowych wzorców okre¶laj±cych nazwy plików do wydobycia lub wypisania"
+ 
+ #: src/main.c:136
+ msgid "Create all files relative to the current directory"
+-msgstr ""
++msgstr "Tworzenie wszystkich plików wzglêdem bie¿±cego katalogu"
+ 
+ #: src/main.c:138
+ msgid ""
+ "When reading a CRC format archive in copy-in mode, only verify the CRC's of "
+ "each file in the archive, don't actually extract the files"
+ msgstr ""
++"Przy czytaniu archiwum w formacie CRC w trybie copy-in sprawdzanie tylko sum CRC ka¿dego pliku w archiwum, bez wydobywania plików"
+ 
+ #: src/main.c:140
+ msgid "Interactively rename files"
+-msgstr ""
++msgstr "Interaktywna zmiana nazw plików"
+ 
+ #: src/main.c:144
+ msgid ""
+ "Swap both halfwords of words and bytes of halfwords in the data. Equivalent "
+ "to -sS"
+ msgstr ""
++"Zamiana zarówno pó³s³ów w s³owach jak i bajtów w pó³s³owach danych. Odpowiednik -sS"
+ 
+ #: src/main.c:146
+ msgid "Swap the bytes of each halfword in the files"
+-msgstr ""
++msgstr "Zamiana bajtów w ka¿dym pó³s³owie w plikach"
+ 
+ #: src/main.c:148
+ msgid "Swap the halfwords of each word (4 bytes) in the files"
+-msgstr ""
++msgstr "Zamiana pó³s³ów w ka¿dym s³owie (4 bajtach) w plikach"
+ 
+ #: src/main.c:151
+ msgid "Extract files to standard output"
+-msgstr ""
++msgstr "Wydobycie plików na standardowe wyj¶cie"
+ 
+ #: src/main.c:155
+ msgid "Operation modifiers valid only in copy-out mode:"
+-msgstr ""
++msgstr "Modyfikatory operacji poprawne tylko w trybie copy-out:"
+ 
+ #: src/main.c:157
+ msgid "Append to an existing archive."
+-msgstr ""
++msgstr "Do³±czenie do istniej±cego archiwum."
+ 
+ #: src/main.c:159
+ msgid ""
+ "Archive filename to use instead of standard output. Optional USER and HOST "
+ "specify the user and host names in case of a remote archive"
+ msgstr ""
++"PLIK archiwum do u¿ycia zamiast standardowego wyj¶cia. Opcjonalne U¯YTKOWNIK i HOST okre¶laj± nazwy u¿ytkownika i hosta w przypadku zdalnego archiwum"
+ 
+ #: src/main.c:163
+ msgid "Operation modifiers valid only in copy-pass mode:"
+-msgstr ""
++msgstr "Modyfikatory operacji poprawne tylko w trybie copy-pass:"
+ 
+ #: src/main.c:165
+ msgid "Link files instead of copying them, when  possible"
+-msgstr ""
++msgstr "Dowi±zywanie plików zamiast kopiowania ich o ile to mo¿liwe"
+ 
+ #: src/main.c:169
+ msgid "Operation modifiers valid for copy-out and copy-pass modes:"
+-msgstr ""
++msgstr "Modyfikatory operacji poprawne w trybach copy-out i copy-pass:"
+ 
+ #: src/main.c:171
+ msgid ""
+ "A list of filenames is terminated by a null character instead of a newline"
+ msgstr ""
++"Lista nazw plików jest zakoñczona znakiem NUL zamiast nowej linii"
+ 
+ #: src/main.c:173
+ msgid ""
+ "Archive filename to use instead of standard input. Optional USER and HOST "
+ "specify the user and host names in case of a remote archive"
+ msgstr ""
++"PLIK archiwum do u¿ycia zamiast standardowego wej¶cia. Opcjonalne U¯YTKOWNIK i HOST okre¶laj± nazwy u¿ytkownika i hosta w przypadku zdalnego archiwum"
+ 
+ #: src/main.c:175
+ msgid ""
+ "Dereference  symbolic  links  (copy  the files that they point to instead of "
+ "copying the links)."
+ msgstr ""
++"Rozwi±zywanie dowi±zañ symbolicznych (kopiowanie plików przez nie wskazywanych zamiast kopiowania dowi±zañ)."
+ 
+ #: src/main.c:176
+ msgid "[USER][:.][GROUP]"
+-msgstr ""
++msgstr "[U¯YTKOWNIK][:.][GRUPA]"
+ 
+ #: src/main.c:177
+ msgid ""
+ "Set the ownership of all files created to the specified USER and/or GROUP"
+ msgstr ""
++"Ustawienie w³a¶ciciela wszystkich tworzonych plików na okre¶lonego U¯YTKOWNIKA i/lub GRUPÊ"
+ 
+ #: src/main.c:179
+ msgid "Write files with large blocks of zeros as sparse files"
+-msgstr ""
++msgstr "Zapis plików z du¿ymi blokami zer jako plików rzadkich"
+ 
+ #: src/main.c:181
+ msgid "Reset the access times of files after reading them"
+-msgstr ""
++msgstr "Wyzerowanie czasów dostêpu plików po odczytaniu ich"
+ 
+ #: src/main.c:185
+ msgid "Operation modifiers valid for copy-in and copy-pass modes:"
+-msgstr ""
++msgstr "Modyfikatory operacji poprawne w trybach copy-in i copy-pass:"
+ 
+ #: src/main.c:187
+ msgid "Retain previous file modification times when creating files"
+-msgstr ""
++msgstr "Zachowanie poprzednich czasów modyfikacji plików przy ich tworzeniu"
+ 
+ #: src/main.c:189
+ msgid "Create leading directories where needed"
+-msgstr ""
++msgstr "Tworzenie wiod±cych katalogów w razie potrzeby"
+ 
+ #: src/main.c:191
+ msgid "Do not change the ownership of the files"
+-msgstr ""
++msgstr "Nie zmienianie w³a¶ciciela plików"
+ 
+ #: src/main.c:193
+ msgid "Replace all files unconditionally"
+-msgstr ""
++msgstr "Bezwarunkowe zast±pienie wszystkich plików"
+ 
+ #: src/main.c:196
+ msgid "Informative options:"
+-msgstr ""
++msgstr "Opcje informacyjne:"
+ 
+ #: src/main.c:198
+ msgid "Give this help list"
+-msgstr ""
++msgstr "Wy¶wietlenie tego tekstu pomocy"
+ 
+ #: src/main.c:199
+ msgid "Give a short usage message"
+-msgstr ""
++msgstr "Wy¶wietlenie krótkiej informacji i sk³adni"
+ 
+ #: src/main.c:200
+ msgid "Print license and exit"
+-msgstr ""
++msgstr "Wypisanie licencji i zakoñczenie"
+ 
+ #: src/main.c:201
+ msgid "Print program version"
+-msgstr ""
++msgstr "Wypisanie wersji programu"
+ 
+ #: src/main.c:216
+ #, c-format
+@@ -421,44 +445,58 @@
+ "   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA\n"
+ "\n"
+ msgstr ""
++"   GNU cpio jest programem darmowym; mo¿na go rozprowadzaæ i/lub modyfikowaæ\n"
++"   na warunkach Powszechnej Licencji Publicznej GNU (General Public License)\n"
++"   opublikowanej przez Free Software Foundation, w wersji 2, lub, do wyboru,\n"
++"   dowolnej pó¼niejszej.\n"
++"\n"
++"   GNU cpio jest rozprowadzany w nadziei, ¿e bêdzie przydatny, ale BEZ\n"
++"   ¯ADNEJ GWARANCJI, nawet bez domy¶lnej gwarancji JAKO¦CI lub PRZYDATNO¦CI\n"
++"   DO KONKRETNYCH ZASTOSOWAÑ. Szczegó³y znajduj± siê w Powszechnej Licencji\n"
++"   Publicznej GNU.\n"
++"\n"
++"   Kopia Powszechnej Licencji Publicznej GNU powinna byæ dostarczona wraz\n"
++"   z tym programem. Je¶li nie, mo¿na napisaæ do Free Software Foundation,\n"
++"   Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA\n"
++"\n"
+ 
+ #: src/main.c:298 src/main.c:315
+ msgid "invalid block size"
+-msgstr "b³êdna d³ugo¶æ bloku"
++msgstr "b³êdny rozmiar bloku"
+ 
+ #: src/main.c:304 src/main.c:336
+ msgid "Archive format multiply defined"
+-msgstr ""
++msgstr "Wielokrotnie okre¶lony format archiwum"
+ 
+ #: src/main.c:354
+-#, fuzzy, c-format
++#, c-format
+ msgid ""
+ "invalid archive format `%s'; valid formats are:\n"
+ "crc newc odc bin ustar tar (all-caps also recognized)"
+ msgstr ""
+-"nieznany format archiwum `%s'; poprawne formaty to:\n"
+-"crc, newc, odc, bin, ustar, tar, hpodc, hpbin"
++"b³êdny format archiwum `%s'; poprawne formaty to:\n"
++"crc, newc, odc, bin, ustar, tar (rozpoznawane tak¿e wielkimi literami)"
+ 
+ #: src/main.c:361 src/main.c:407 src/main.c:421
+ msgid "Mode already defined"
+-msgstr ""
++msgstr "Tryb ju¿ okre¶lony"
+ 
+ #: src/main.c:401
+ msgid "--no-preserve-owner cannot be used with --owner"
+-msgstr ""
++msgstr "--no-preserve-owner nie mo¿e byæ u¿yte wraz z --owner"
+ 
+ #: src/main.c:444
+ msgid "--owner cannot be used with --no-preserve-owner"
+-msgstr ""
++msgstr "--owner nie mo¿e byæ o¿yte wraz z --no-preserve-owner"
+ 
+ #: src/main.c:490
+ #, c-format
+ msgid "Invalid value for --warning option: %s"
+-msgstr ""
++msgstr "B³êdna warto¶æ dla opcji --warning: %s"
+ 
+ #: src/main.c:537
+ msgid "[destination-directory]"
+-msgstr ""
++msgstr "[katalog-docelowy]"
+ 
+ #: src/main.c:556 src/main.c:572
+ #, c-format
+@@ -466,31 +504,34 @@
+ "You must specify one of -oipt options.\n"
+ "Try `%s --help' or `%s --usage' for more information.\n"
+ msgstr ""
++"Trzeba podaæ jedn± z opcji -oipt.\n"
++"Uruchomienie `%s --help' lub `%s --usage' poda wiêcej informacji.\n"
+ 
+ #: src/main.c:600
+ msgid "Both -I and -F are used in copy-in mode"
+-msgstr ""
++msgstr "U¿yto jednocze¶nie -I i -F w trybie copy-in"
+ 
+ #: src/main.c:612 src/main.c:648
+ msgid "Too many arguments"
+-msgstr ""
++msgstr "Za du¿o argumentów"
+ 
+ #: src/main.c:631
+ msgid ""
+ "--append is used but no archive file name is given (use -F or -O options"
+ msgstr ""
++"U¿yto --append, ale nie podano nazwy pliku archiwum (nale¿y u¿yæ opcji -F lub -O)"
+ 
+ #: src/main.c:637
+ msgid "Both -O and -F are used in copy-out mode"
+-msgstr ""
++msgstr "U¿yto jednocze¶nie -O i -F w trybie copy-out"
+ 
+ #: src/main.c:652
+ msgid "Archive format is not specified in copy-pass mode (use --format option)"
+-msgstr ""
++msgstr "Nie podano formatu archiwum w trybie copy-pass"
+ 
+ #: src/main.c:672
+ msgid "-F can be used only with --create or --extract"
+-msgstr ""
++msgstr "-F mo¿e byæ u¿yte tylko wraz z --create lub --extract"
+ 
+ #: src/main.c:760
+ msgid "error closing archive"
+@@ -499,7 +540,7 @@
+ #: src/makepath.c:151 src/makepath.c:218
+ #, c-format
+ msgid "cannot make directory `%s'"
+-msgstr "nie moge utworzyæ katalogu `%s'"
++msgstr "nie mo¿na utworzyæ katalogu `%s'"
+ 
+ #: src/makepath.c:193 src/makepath.c:271
+ #, c-format
+@@ -507,13 +548,13 @@
+ msgstr "`%s' istnieje, ale nie jest katalogiem"
+ 
+ #: src/mt.c:224
+-#, fuzzy, c-format
++#, c-format
+ msgid ""
+ "Usage: %s [-V] [-f device] [--file=device] [--rsh-command=command]\n"
+ "\t[--help] [--version] operation [count]\n"
+ msgstr ""
+-"U¿ycie: %s [-V] [-f urz±dzenie] [--file=urz±dzenie] [--help] [--version] "
+-"operacja [liczba]\n"
++"Sk³adnia: %s [-V] [-f urz±dzenie] [--file=urz±dzenie] [--rsh-command=polecenie]\n"
++"\t[--help] [--version] operacja [liczba]\n"
+ 
+ #: src/mt.c:308
+ msgid "no tape device specified"
+@@ -529,7 +570,7 @@
+ 
+ #: src/userspec.c:146
+ msgid "cannot get the login group of a numeric UID"
+-msgstr "nie mogê uzyskaæ grupy liczbowego UIDu"
++msgstr "nie mogê uzyskaæ grupy liczbowego UID-u"
+ 
+ #: src/userspec.c:186
+ msgid "invalid group"
+@@ -560,12 +601,12 @@
+ #: src/util.c:560
+ #, c-format
+ msgid "File %s grew, %ld new bytes not copied"
+-msgstr ""
++msgstr "Plik %s powiêkszy³ siê, %ld nowych bajtów nie skopiowanych"
+ 
+ #: src/util.c:564
+ #, c-format
+ msgid "File %s was modified while being copied"
+-msgstr ""
++msgstr "Plik %s zosta³ zmodyfikowany w trakcie kopiowania"
+ 
+ #: src/util.c:592
+ msgid "virtual memory exhausted"
+@@ -573,22 +614,22 @@
+ 
+ #: src/util.c:628 src/util.c:634
+ msgid "cannot seek on output"
+-msgstr "nie mogê przesun±æ wska¼nika na wyj¶ciu"
++msgstr "nie mo¿na przesun±æ wska¼nika na wyj¶ciu"
+ 
+ #: src/util.c:874
+ #, c-format
+ msgid "Found end of tape.  Load next tape and press RETURN. "
+-msgstr "Koniec ta¶my. Za³aduj nastêpn± i wci¶nij RETURN. "
++msgstr "Koniec ta¶my. Nale¿y za³adowaæ nastêpn± i wcisn±æ RETURN. "
+ 
+ #: src/util.c:876
+ #, c-format
+ msgid "Found end of tape.  To continue, type device/file name when ready.\n"
+-msgstr "Koniec ta¶my.  Wpisz nazwê urz±dzenia/pliku kiedy bêdziesz gotowy.\n"
++msgstr "Koniec ta¶my. Aby kontynuowaæ nale¿y wpisaæ nazwê urz±dzenia/pliku.\n"
+ 
+ #: src/util.c:899
+ #, c-format
+ msgid "To continue, type device/file name when ready.\n"
+-msgstr "Wpisz nazwê urz±dzenia/pliku kiedy bêdziesz gotowy.\n"
++msgstr "Aby kontynuowaæ nale¿y wpisaæ nazwê urz±dzenia/pliku.\n"
+ 
+ #: src/util.c:924
+ #, c-format
+@@ -603,12 +644,12 @@
+ #: lib/getopt.c:603 lib/getopt.c:607
+ #, c-format
+ msgid "%s: option `--%s' doesn't allow an argument\n"
+-msgstr "%s: opcja `--%s' nie przewiduje argumentów\n"
++msgstr "%s: opcja `--%s' nie mo¿e mieæ argumentu\n"
+ 
+ #: lib/getopt.c:616 lib/getopt.c:621
+ #, c-format
+ msgid "%s: option `%c%s' doesn't allow an argument\n"
+-msgstr "%s: opcja `%c%s' nie przewiduje argumentu\n"
++msgstr "%s: opcja `%c%s' nie mo¿e mieæ argumentu\n"
+ 
+ #: lib/getopt.c:667 lib/getopt.c:689 lib/getopt.c:1020 lib/getopt.c:1042
+ #, c-format
+@@ -618,301 +659,55 @@
+ #: lib/getopt.c:727 lib/getopt.c:730
+ #, c-format
+ msgid "%s: unrecognized option `--%s'\n"
+-msgstr "%s: nieznana opcja `--%s'\n"
++msgstr "%s: nierozpoznana opcja `--%s'\n"
+ 
+ #: lib/getopt.c:738 lib/getopt.c:741
+ #, c-format
+ msgid "%s: unrecognized option `%c%s'\n"
+-msgstr "%s: nieznana opcja `%c%s'\n"
++msgstr "%s: nierozpoznana opcja `%c%s'\n"
+ 
+ #: lib/getopt.c:796 lib/getopt.c:799
+ #, c-format
+ msgid "%s: illegal option -- %c\n"
+-msgstr "%s: b³êdna opcja -- %c\n"
++msgstr "%s: nielegalna opcja -- %c\n"
+ 
+ #: lib/getopt.c:805 lib/getopt.c:808
+ #, c-format
+ msgid "%s: invalid option -- %c\n"
+-msgstr "%s: z³a opcja -- %c\n"
++msgstr "%s: b³êdna opcja -- %c\n"
+ 
+ #: lib/getopt.c:863 lib/getopt.c:882 lib/getopt.c:1095 lib/getopt.c:1116
+ #, c-format
+ msgid "%s: option requires an argument -- %c\n"
+-msgstr "%s: opcja wymaga argumetu -- %c\n"
++msgstr "%s: opcja wymaga argumentu -- %c\n"
+ 
+ #: lib/getopt.c:935 lib/getopt.c:954
+-#, fuzzy, c-format
++#, c-format
+ msgid "%s: option `-W %s' is ambiguous\n"
+-msgstr "%s: opcja `%s' jest niejednoznaczna\n"
++msgstr "%s: opcja `-W %s' jest niejednoznaczna\n"
+ 
+ #: lib/getopt.c:978 lib/getopt.c:999
+-#, fuzzy, c-format
++#, c-format
+ msgid "%s: option `-W %s' doesn't allow an argument\n"
+-msgstr "%s: opcja `--%s' nie przewiduje argumentów\n"
++msgstr "%s: opcja `-W %s' nie mo¿e mieæ argumentu\n"
+ 
+ #: lib/rtapelib.c:297
+-#, fuzzy
+ msgid "exec/tcp: Service not available"
+-msgstr "exec/tcp: us³uga niedostêpna"
++msgstr "exec/tcp: Us³uga niedostêpna"
+ 
+ #: lib/rtapelib.c:301
+ msgid "stdin"
+-msgstr ""
++msgstr "standardowe wej¶cie"
+ 
+ #: lib/rtapelib.c:304
+ msgid "stdout"
+-msgstr ""
++msgstr "standardowe wyj¶cie"
+ 
+ #: lib/rtapelib.c:512
+-#, fuzzy
+ msgid "Cannot execute remote shell"
+-msgstr "nie mogê uruchomiæ zdalnej pow³oki"
++msgstr "Nie mo¿na uruchomiæ zdalnej pow³oki"
+ 
+ #: lib/strerror.c:44 lib/strerror.c:57
+ #, c-format
+ msgid "error %d"
+-msgstr ""
+-
+-#~ msgid "Memory exhausted"
+-#~ msgstr "Brak pamiêci"
+-
+-#~ msgid "%s is not a character special file"
+-#~ msgstr "%s nie jest plikiem specjalnym znakowym"
+-
+-#~ msgid "cannot open directory %s"
+-#~ msgstr "nie mogê otworzyæ katalogu %s"
+-
+-#~ msgid "block size cannot be 0"
+-#~ msgstr "blok nie mo¿e mieæ wielko¶ci 0"
+-
+-#~ msgid "GNU mt version %s\n"
+-#~ msgstr "GNU mt wersja %s\n"
+-
+-#~ msgid "Success"
+-#~ msgstr "Sukces"
+-
+-#~ msgid "parse error in blocksize"
+-#~ msgstr "z³y rozmiar bloku"
+-
+-#~ msgid "Regular expression too big"
+-#~ msgstr "Wyra¿enie regularne za du¿e"
+-
+-#~ msgid ""
+-#~ "Usage: %s {-o|--create} [-0acvABLV] [-C bytes] [-H format] [-M message]\n"
+-#~ "       [-O [[user@]host:]archive] [-F [[user@]host:]archive]\n"
+-#~ "       [--file=[[user@]host:]archive] [--format=format] [--"
+-#~ "message=message]\n"
+-#~ "       [--null] [--reset-access-time] [--verbose] [--dot] [--append]\n"
+-#~ "       [--block-size=blocks] [--dereference] [--io-size=bytes] [--quiet]\n"
+-#~ "       [--force-local] [--help] [--version] < name-list [> archive]\n"
+-#~ msgstr ""
+-#~ "U¿ycie: %s {-o|--create} [-0acvABLV] [-C bajty] [-H format] [-M "
+-#~ "komunikat]\n"
+-#~ "       [-O [[u¿ytkownik@]host:]archiwum] [-F [[u¿ytkownik@]host:]"
+-#~ "archiwum]\n"
+-#~ "       [--file=[[u¿ytkownik@]host:]archiwum] [--format=format]\n"
+-#~ "       [--message=komunikat] [--null] [--reset-access-time] [--verbose]\n"
+-#~ "       [--dot] [--append] [--block-size=bloki] [--dereference]\n"
+-#~ "       [--io-size=bajty] [--quiet] [--force-local] [--help] [--version]\n"
+-#~ "       < lista_nazw [> archiwum]\n"
+-
+-#~ msgid "Premature end of regular expression"
+-#~ msgstr "Niespodziewany koniece wyra¿enie regularnego"
+-
+-#~ msgid ""
+-#~ "       %s {-r|--read} {-w|--write} [-cdnv] [-f archive] [-s replacement]\n"
+-#~ "       [--nonmatching] [--directories-only] [--first-pattern] [--"
+-#~ "verbose]\n"
+-#~ "       [--replace=replacement] [pattern...] [< archive]\n"
+-#~ msgstr ""
+-#~ "       %s {-r|--read} {-w|--write} [-cdnv] [-f archiwum] [-s zamiennik]\n"
+-#~ "       [--nonmatching] [--directories-only] [--first-pattern] [--"
+-#~ "verbose]\n"
+-#~ "       [--replace=zamiennik] [wzorzec...] [< archiwum]\n"
+-
+-#~ msgid "block number = %d\n"
+-#~ msgstr "numer bloku = %s\n"
+-
+-#~ msgid "Invalid character class name"
+-#~ msgstr "B³êdna nazwa klasy znaku"
+-
+-#~ msgid "drive type = %d\n"
+-#~ msgstr "typ napêdu = %d\n"
+-
+-#~ msgid "unrecognized flag `%c' for -p; recognized flags are `aemop'"
+-#~ msgstr "nieznana flaga `%c' dla -p; w³a¶ciwe flagi to `aemop'"
+-
+-#~ msgid "ambiguous"
+-#~ msgstr "niejednoznaczna(y)"
+-
+-#~ msgid "missing regexp"
+-#~ msgstr "brakuj±ce wyra¿enie regularne"
+-
+-#~ msgid "1 block\n"
+-#~ msgstr "1 blok\n"
+-
+-#~ msgid "No match"
+-#~ msgstr "Nie znalaz³em pasuj±cych"
+-
+-#~ msgid "residue count = %d\n"
+-#~ msgstr "pozostaje  %d\n"
+-
+-#~ msgid ""
+-#~ "       %s {-p|--pass-through} [-0adlmuvLV] [-R [user][:.][group]]\n"
+-#~ "       [--null] [--reset-access-time] [--make-directories] [--link] [--"
+-#~ "quiet]\n"
+-#~ "       [--preserve-modification-time] [--unconditional] [--verbose] [--"
+-#~ "dot]\n"
+-#~ "       [--dereference] [--owner=[user][:.][group]] [--no-preserve-owner]\n"
+-#~ "       [--sparse] [--help] [--version] destination-directory < name-list\n"
+-#~ msgstr ""
+-#~ "       %s {-p|--pass-through} [-0adlmuvLV] [-R [u¿ytkownik][:.][grupa]]\n"
+-#~ "       [--null] [--reset-access-time] [--make-directories] [--link] [--"
+-#~ "quiet]\n"
+-#~ "       [--preserve-modification-time] [--unconditional] [--verbose] [--"
+-#~ "dot]\n"
+-#~ "       [--dereference] [--owner=[u¿ytkownik][:.][grupa]] [--no-preserve-"
+-#~ "owner]\n"
+-#~ "       [--sparse] [--help] [--version] katalog_docelowy < lista_nazw\n"
+-
+-#~ msgid "drive status = %d\n"
+-#~ msgstr "stan napêdu = %d\n"
+-
+-#~ msgid "Unmatched [ or [^"
+-#~ msgstr "Niesparowany [ lub [^"
+-
+-#~ msgid ""
+-#~ "       %s {-i|--extract} [-bcdfmnrtsuvBSV] [-C bytes] [-E file] [-H "
+-#~ "format]\n"
+-#~ "       [-M message] [-R [user][:.][group]] [-I [[user@]host:]archive]\n"
+-#~ "       [-F [[user@]host:]archive] [--file=[[user@]host:]archive]\n"
+-#~ "       [--make-directories] [--nonmatching] [--preserve-modification-"
+-#~ "time]\n"
+-#~ "       [--numeric-uid-gid] [--rename] [--list] [--swap-bytes] [--swap] [--"
+-#~ "dot]\n"
+-#~ "       [--unconditional] [--verbose] [--block-size=blocks] [--swap-"
+-#~ "halfwords]\n"
+-#~ "       [--io-size=bytes] [--pattern-file=file] [--format=format]\n"
+-#~ "       [--owner=[user][:.][group]] [--no-preserve-owner] [--"
+-#~ "message=message]\n"
+-#~ "       [--force-local] [--no-absolute-filenames] [--sparse] [--only-"
+-#~ "verify-crc]\n"
+-#~ "       [--quiet] [--help] [--version] [pattern...] [< archive]\n"
+-#~ msgstr ""
+-#~ "       %s {-i|--extract} [-bcdfmnrtsuvBSV] [-C bajty] [-E plik] [-H "
+-#~ "format]\n"
+-#~ "       [-M komunikat] [-R [u¿ytkownik][:.][grupa]]\n"
+-#~ "       [-I [[u¿ytkownik@]host:]archiwum]\n"
+-#~ "       [-F [[u¿ytkownik@]host:]archiwum]\n"
+-#~ "       [--file=[[u¿ytkownik@]host:]archiwum]\n"
+-#~ "       [--make-directories] [--nonmatching] [--preserve-modification-"
+-#~ "time]\n"
+-#~ "       [--numeric-uid-gid] [--rename] [--list] [--swap-bytes] [--swap] [--"
+-#~ "dot]\n"
+-#~ "       [--unconditional] [--verbose] [--block-size=bloki] [--swap-"
+-#~ "halfwords]\n"
+-#~ "       [--io-size=bajty] [--pattern-file=plik] [--format=format]\n"
+-#~ "       [--owner=[u¿ytkownik][:.][grupa]] [--no-preserve-owner]\n"
+-#~ "       [--message=komunikat] [--force-local] [--no-absolute-filenames]\n"
+-#~ "       [--sparse] [--only-verify-crc] [--quiet] [--help] [--version]\n"
+-#~ "       [wzorzec...] [< archiwum]\n"
+-
+-#~ msgid ""
+-#~ "       %s {-r|--read} [-cdiknuv] [-f archive] [-s replacement]\n"
+-#~ "       [--nonmatching] [--directories-only] [--first-pattern] [--"
+-#~ "verbose]\n"
+-#~ "       [--replace=replacement] [pattern...] [< archive]\n"
+-#~ msgstr ""
+-#~ "       %s {-r|--read} [-cdiknuv] [-f archiwum] [-s zamiennik]\n"
+-#~ "       [--nonmatching] [--directories-only] [--first-pattern] [--"
+-#~ "verbose]\n"
+-#~ "       [--replace=zamiennik] [wzorzec...] [< archiwum]\n"
+-
+-#~ msgid "drive status (low) = %d\n"
+-#~ msgstr "stan urz±dzenia (low) = %d\n"
+-
+-#~ msgid "file number = %d\n"
+-#~ msgstr "numer pliku = %d\n"
+-
+-#~ msgid "Invalid collation character"
+-#~ msgstr "B³êdny znak porównania"
+-
+-#~ msgid "Unmatched \\{"
+-#~ msgstr "Niesparowane \\{"
+-
+-#~ msgid "Unmatched ) or \\)"
+-#~ msgstr "Niesparowane ) lub \\)"
+-
+-#~ msgid "Invalid preceding regular expression"
+-#~ msgstr "B³±d w poprzednim wyra¿eniu regularnym"
+-
+-#~ msgid "null regexp"
+-#~ msgstr "pusty regexp"
+-
+-#~ msgid "%s already exists; not created"
+-#~ msgstr "%s istnieje; nie stworzy³em"
+-
+-#~ msgid "Invalid back reference"
+-#~ msgstr "B³êdne odniesienie wsteczne"
+-
+-#~ msgid ""
+-#~ "Usage: %s [-cdnv] [-f archive] [-s replacement] [--nonmatching]\n"
+-#~ "       [--directories-only] [--first-pattern] [--verbose]\n"
+-#~ "       [--replace=replacement] [pattern...] [< archive]\n"
+-#~ msgstr ""
+-#~ "Usage: %s [-cdnv] [-f archiwum] [-s zamiennik] [--nonmatching]\n"
+-#~ "       [--directories-only] [--first-pattern] [--verbose]\n"
+-#~ "       [--replace=zamiennik] [wzorzec...] [< archiwum]\n"
+-
+-#~ msgid "Unmatched ( or \\("
+-#~ msgstr "Niesparowany ( lub \\("
+-
+-#~ msgid "GNU cpio version %s\n"
+-#~ msgstr "GNU cpio wersja %s\n"
+-
+-#~ msgid "invalid"
+-#~ msgstr "b³êdny(a)"
+-
+-#~ msgid "GNU pax version %s\n"
+-#~ msgstr "GNU pax wersja %s\n"
+-
+-#~ msgid "Invalid content of \\{\\}"
+-#~ msgstr "Niew³a¶ciwa zawarto¶æ \\{\\}"
+-
+-#~ msgid "Invalid range end"
+-#~ msgstr "B³êdny koniec zakresu"
+-
+-#~ msgid "sense key error = %d\n"
+-#~ msgstr "b³±d klucza = %d\n"
+-
+-#~ msgid "Trailing backslash"
+-#~ msgstr "Koñcz±cy uko¶nik odwrotny"
+-
+-#~ msgid "can not omit both user and group"
+-#~ msgstr "nie mogê pomin±æ równocze¶nie u¿ytkownika i grupy"
+-
+-#~ msgid "Invalid regular expression"
+-#~ msgstr "B³êdne wyra¿enie regularne"
+-
+-#~ msgid "No previous regular expression"
+-#~ msgstr "Nie podano wyra¿enia regularnego"
+-
+-#~ msgid ""
+-#~ "       %s {-w|--write} [-cdnv] [-f archive] [-s replacement]\n"
+-#~ "       [--nonmatching] [--directories-only] [--first-pattern] [--"
+-#~ "verbose]\n"
+-#~ "       [--replace=replacement] [pattern...] [< archive]\n"
+-#~ msgstr ""
+-#~ "       %s {-w|--write} [-cdnv] [-f archiwum] [-s zamiennik]\n"
+-#~ "       [--nonmatching] [--directories-only] [--first-pattern] [--"
+-#~ "verbose]\n"
+-#~ "       [--replace=zamiennik] [wzorzec...] [< archiwum]\n"
+-
+-#~ msgid "drive status (high) = %d\n"
+-#~ msgstr "stan napêdu (high) = %d\n"
+-
+-#~ msgid "%s while compiling pattern"
+-#~ msgstr "%s podczas kompilowania wzorca"
+-
+-#~ msgid "invalid regexp modifier `%c'"
+-#~ msgstr "b³êdny modyfikator regexpa `%c'"
++msgstr "b³±d %d"
