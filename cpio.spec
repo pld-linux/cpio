@@ -20,7 +20,7 @@ Patch6:		cpio-DESTDIR.patch
 Patch7:		cpio-stdout.patch
 Patch8:		cpio-emptylink.patch
 Prereq:		/usr/sbin/fix-info-dir
-Buildroot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_exec_prefix	/
 
