@@ -1,17 +1,29 @@
 Summary:	GNU cpio archiving program
 Summary(de):	GNU-cpio-Archivierungsprogramm 
-Summary(es): Programa de empaquetado cpio de la GNU (usado por el utilitario rpm)
+Summary(es):	Programa de empaquetado cpio de la GNU (usado por el utilitario rpm)
 Summary(fr):	Programme d'archivage cpio de GNU
 Summary(pl):	Program archwizuj±cy na licencji GNU
-Summary(pt_BR): Programa de empacotamento cpio da GNU (usado pelo utilitário rpm)
+Summary(pt_BR):	Programa de empacotamento cpio da GNU (usado pelo utilitário rpm)
 Summary(tr):	GNU cpio arþivleme programý
 Name:		cpio
 Version:	2.4.2
-Release:	26
+Release:	27
 License:	GPL
 Group:		Applications/Archiving
+Group(cs):	Aplikace/Archivování
+Group(da):	Programmer/Arkivering
 Group(de):	Applikationen/Archivierung
+Group(es):	Aplicaciones/Archivar
+Group(fr):	Applications/Archivage
+Group(is):	Forrit/Þjöppun
+Group(it):	Applicazioni/Archiviazione
+Group(ja):	¥¢¥×¥ê¥±¡¼¥·¥ç¥ó/¥¢¡¼¥«¥¤¥Ö
+Group(no):	Applikasjoner/Arkivering
 Group(pl):	Aplikacje/Archiwizacja
+Group(pt):	Aplicações/Arquivos
+Group(ru):	ðÒÉÌÏÖÅÎÉÑ/áÒÈÉ×ÉÒÏ×ÁÎÉÅ
+Group(sl):	Programi/Arhiviranje
+Group(sv):	Tillämpningar/Arkivering
 Source0:	ftp://prep.ai.mit.edu/pub/gnu/cpio/%{name}-%{version}.tar.gz
 Patch0:		%{name}-glibc.patch
 Patch1:		%{name}-mtime.patch
@@ -25,7 +37,8 @@ Patch9:		%{name}-errorcode.patch
 Patch10:	%{name}-gethostname_is_in_libc_aka_no_libnsl.patch
 Patch11:	%{name}-man.patch
 Patch12:	%{name}-debian36.patch
-patch13:	%{name}-freebsd.patch
+Patch13:	%{name}-freebsd.patch
+Patch14:	%{name}-bug56346.patch
 BuildRequires:	autoconf
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -58,11 +71,11 @@ cpio das Format automatisch, es kann auch Archive lesen, die auf
 Computern mit anderer Byteordnung erzeugt wurden.
 
 %description -l pt_BR
-cpio copia arquivos para dentro ou para fora ou de um "archive"
-cpio ou tar, que é um arquivo que contém outros arquivos mais
-informações sobre eles, como o seu nome de arquivo, dono e permissões
-de acesso. O "archive" pode ser outro arquivo no disco, uma fita
-magnética ou um pipe. cpio possui três modos de operação.
+cpio copia arquivos para dentro ou para fora ou de um "archive" cpio
+ou tar, que é um arquivo que contém outros arquivos mais informações
+sobre eles, como o seu nome de arquivo, dono e permissões de acesso. O
+"archive" pode ser outro arquivo no disco, uma fita magnética ou um
+pipe. cpio possui três modos de operação.
 
 %description -l fr
 cpio copie des fichiers dans ou à partir d'une archive tar ou cpio,
@@ -79,11 +92,11 @@ dostêpu. Archiwum mo¿e byæ plikiem na dysku, ta¶mie magetycznej, albo
 potokiem.
 
 %description -l es
-cpio copia archivos para dentro o para fuera, o de un "archive"
-cpio o tar, que es un archivo que contiene otros archivos,
-más información sobre ellos, como su nombre de archivo, dueño y
-permisos de acceso. "archive" puede ser otro archivo en el disco,
-una cinta magnética o un pipe. cpio posee tres modos de operación.
+cpio copia archivos para dentro o para fuera, o de un "archive" cpio o
+tar, que es un archivo que contiene otros archivos, más información
+sobre ellos, como su nombre de archivo, dueño y permisos de acceso.
+"archive" puede ser otro archivo en el disco, una cinta magnética o un
+pipe. cpio posee tres modos de operación.
 
 %description -l tr
 cpio programý, cpio veya tar arþivlerinden dosya çeker ya da bu
@@ -107,6 +120,7 @@ teyp veya bir pipe olabilir.
 %patch11 -p1
 %patch12 -p1
 %patch13 -p1
+%patch14 -p1
 chmod -R a+Xr,u+Xw .
 
 %build
