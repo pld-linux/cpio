@@ -99,10 +99,3 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) /bin/cpio
 %{_infodir}/cpio*
 %{_mandir}/man1/cpio.*
-
-%changelog
-* Sat May 29 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [2.4.2-15]
-- based on RH spec,
-- spec rewrited by PLD team,
-- pl translation by Micha³ Kuratczyk <kurkens@polbox.com>.
