@@ -8,28 +8,27 @@ Summary(ru):	Архивная программа GNU
 Summary(tr):	GNU cpio arЧivleme programЩ
 Summary(uk):	Арх╕вна програма GNU
 Name:		cpio
-Version:	2.5
-Release:	3
+Version:	2.6
+Release:	1
 License:	GPL v2+
 Group:		Applications/Archiving
-Source0:	ftp://ftp.gnu.org/pub/gnu/cpio/%{name}-%{version}.tar.gz
-#Source0-md5:	e02859af1bbbbd73fcbf757acb57e0a4
+Source0:	ftp://ftp.gnu.org/gnu/cpio/%{name}-%{version}.tar.bz2
+# Source0-md5:	25e0e8725bc60ed3460c9cde92752674
 Source1:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-non-english-man-pages.tar.bz2
-#Source1-md5:	027552f4053477462a09fadc162a5e65
-Patch0:		%{name}-mtime.patch
-Patch1:		%{name}-svr4compat.patch
-Patch2:		%{name}-info.patch
-Patch3:		%{name}-DESTDIR.patch
-Patch4:		%{name}-errorcode.patch
-Patch5:		%{name}-gethostname_is_in_libc_aka_no_libnsl.patch
-Patch6:		%{name}-man.patch
-Patch7:		%{name}-freebsd.patch
-Patch8:		%{name}-pmake.patch
-BuildRequires:	autoconf
+# Source1-md5:	027552f4053477462a09fadc162a5e65
+Patch0:		%{name}-info.patch
+Patch1:		%{name}-gethostname_is_in_libc_aka_no_libnsl.patch
+Patch2:		%{name}-lfs.patch
+Patch3:		%{name}-pl.po-update.patch
+Patch4:		%{name}-locale.patch
+URL:		http://www.gnu.org/software/cpio/
+BuildRequires:	autoconf >= 2.54
+BuildRequires:	automake
+BuildRequires:	gettext-devel >= 0.13
 BuildRequires:	texinfo
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_exec_prefix	/
+%define		_bindir		/bin
 
 %description
 GNU cpio copies files into or out of a cpio or tar archive. Archives
@@ -111,14 +110,15 @@ cpio коп╕ю╓ файли в або з арх╕ву cpio або tar, який явля╓ собою файл,
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
-%patch8 -p1
-chmod -R a+Xr,u+Xw .
+
+rm -f po/stamp-po
 
 %build
+%{__gettextize}
+%{__aclocal} -I m4
 %{__autoconf}
+%{__autoheader}
+%{__automake}
 %configure
 
 %{__make}
@@ -131,6 +131,8 @@ rm -rf $RPM_BUILD_ROOT
 
 bzip2 -dc %{SOURCE1} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
 
+%find_lang %{name}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -140,11 +142,11 @@ rm -rf $RPM_BUILD_ROOT
 %postun
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc README
+%doc AUTHORS ChangeLog NEWS README THANKS TODO
 %attr(755,root,root) /bin/cpio
-%{_infodir}/cpio*
+%{_infodir}/cpio.info*
 %{_mandir}/man1/cpio.1*
 %lang(es) %{_mandir}/es/man1/cpio.1*
 %lang(hu) %{_mandir}/hu/man1/cpio.1*
