@@ -1,0 +1,11 @@
+--- cpio-2.4.2/main.c.svr4compat	Tue Jun 30 12:22:05 1998
++++ cpio-2.4.2/main.c	Tue Jun 30 12:22:34 1998
+@@ -169,6 +169,8 @@
+ 	case 'c':		/* Use the old portable ASCII format.  */
+ 	  if (archive_format != arf_unknown)
+ 	    usage (stderr, 2);
++#define	SVR4_COMPAT	1
++#define	SVR4_COMPAT	1
+ #ifdef SVR4_COMPAT
+ 	  archive_format = arf_newascii; /* -H newc.  */
+ #else
