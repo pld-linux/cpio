@@ -5,7 +5,7 @@ Summary(pl):	Program archwizuj±cy na licencji GNU
 Summary(tr):	GNU cpio arþivleme programý
 Name:		cpio
 Version:	2.4.2
-Release:	12
+Release:	13
 Copyright:	GPL
 Group:		Utilities/Archiving
 Group(pl):	Narzêdzia/Archiwizacja
@@ -17,7 +17,6 @@ Patch3:		cpio-info.patch
 Patch4:		cpio-glibc21.patch
 Prereq:		/sbin/install-info
 Buildroot:	/tmp/%{name}-%{version}-root
-Conflicts:	glibc <= 2.0.7
 
 %description
 cpio copies files into or out of a cpio or tar archive, which is a
@@ -78,7 +77,8 @@ make install \
 	bindir=$RPM_BUILD_ROOT/bin \
 	libexecdir=$RPM_BUILD_ROOT/sbin
 	
-gzip -9nf $RPM_BUILD_ROOT/usr/{info/cpio*,man/man1/*}
+gzip -9nf $RPM_BUILD_ROOT/usr/{info/cpio*,man/man1/*} \
+	README
 
 %post
 /sbin/install-info /usr/info/cpio.info.gz /etc/info-dir
@@ -93,12 +93,17 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README
+%doc README.gz
 %attr(755,root,root) /bin/cpio
 /usr/info/cpio*
 /usr/man/man1/*
 
 %changelog
+* Thu Apr 22 1999 Artur Frysiak <wiget@pld.org.pl>
+  [2.4.2-13]
+- compiled on rpm 3
+- gzipped docs
+
 * Thu Mar 11 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [2.4.2-12]
 - added "Conflicts: glibc <= 2.0.7" for installing cpio in proper enviroment,
