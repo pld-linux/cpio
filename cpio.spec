@@ -15,6 +15,7 @@ Patch1:		cpio-mtime.patch
 Patch2:		cpio-svr4compat.patch
 Patch3:		cpio-info.patch
 Patch4:		cpio-glibc21.patch
+Patch5:		cpio-longlongdev.patch
 Prereq:		/sbin/install-info
 Buildroot:	/tmp/%{name}-%{version}-root
 
@@ -60,6 +61,7 @@ disk üzerinde baþka bir dosya, manyetik bir teyp veya bir pipe olabilir.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
