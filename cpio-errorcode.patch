@@ -1,0 +1,47 @@
+--- cpio-2.4.2/main.c.error	Sat Jun 24 10:29:07 2000
++++ cpio-2.4.2/main.c	Sat Jun 24 10:29:07 2000
+@@ -518,5 +518,5 @@ main (argc, argv)
+   if (archive_des >= 0 && rmtclose (archive_des) == -1)
+     error (1, errno, "error closing archive");
+ 
+-  exit (0);
++  exit (error_count != 0);
+ }
+--- cpio-2.4.2/extern.h.error	Wed Nov 30 14:48:28 1994
++++ cpio-2.4.2/extern.h	Sat Jun 24 10:29:07 2000
+@@ -84,6 +84,8 @@ extern int f_force_local;
+ extern char *program_name;
+ extern int (*xstat) ();
+ extern void (*copy_function) ();
++
++extern unsigned int error_count;
+ 
+ #if __STDC__ || defined(__MSDOS__)
+ # define P_(s) s
+--- cpio-2.4.2/error.c.error	Tue Dec  5 15:39:52 1995
++++ cpio-2.4.2/error.c	Sat Jun 24 10:26:42 2000
+@@ -46,6 +46,10 @@ void exit ();
+ /* This variable is incremented each time `error' is called.  */
+ unsigned int error_message_count;
+ 
++/* This variable is incremented each time `error' is called and
++   errnum is not zero.  */
++unsigned int error_count;
++
+ /* If NULL, error will flush stdout, then print on stderr the program
+    name, a colon and a space.  Otherwise, error will call this
+    function without parameters instead.  */
+@@ -122,7 +126,10 @@ error (status, errnum, message, va_alist
+   ++error_message_count;
+ 
+   if (errnum)
+-    fprintf (stderr, ": %s", strerror (errnum));
++    {
++      fprintf (stderr, ": %s", strerror (errnum));
++      error_count++;
++    }
+   putc ('\n', stderr);
+   fflush (stderr);
+   if (status)
+
+
