@@ -83,11 +83,11 @@ gzip -9nf $RPM_BUILD_ROOT/usr/{info/cpio*,man/man1/*} \
 	README
 
 %post
-/sbin/install-info /usr/info/cpio.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/cpio.info.gz /etc/info-dir
 
 %preun
 if [ "$1" = "0" ]; then
-	/sbin/install-info --delete /usr/info/cpio.info.gz /etc/info-dir
+	/sbin/install-info --delete %{_infodir}/cpio.info.gz /etc/info-dir
 fi
 
 %clean
@@ -97,8 +97,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README.gz
 %attr(755,root,root) /bin/cpio
-/usr/info/cpio*
-/usr/man/man1/*
+%{_infodir}/cpio*
+%{_mandir}/man1/*
 
 %changelog
 * Wed Apr 28 1999 Artur Frysiak <wiget@pld.org.pl>
