@@ -5,10 +5,11 @@ Summary(pl):	Program archwizuj±cy na licencji GNU
 Summary(tr):	GNU cpio arþivleme programý
 Name:		cpio
 Version:	2.4.2
-Release:	21
+Release:	22
 License:	GPL
-Group:		Utilities/Archiving
-Group(pl):	Narzêdzia/Archiwizacja
+Group:		Applications/Archiving
+Group(de):	Applikationen/Archivierung
+Group(pl):	Aplikacje/Archiwizacja
 Source0:	ftp://prep.ai.mit.edu/pub/gnu/cpio/%{name}-%{version}.tar.gz
 Patch0:		%{name}-glibc.patch
 Patch1:		%{name}-mtime.patch
@@ -21,6 +22,7 @@ Patch7:		%{name}-stdout.patch
 Patch8:		%{name}-emptylink.patch
 Patch9:		%{name}-errorcode.patch
 Patch10:	%{name}-gethostname_is_in_libc_aka_no_libnsl.patch
+Patch11:	%{name}-man.patch
 BuildRequires:	autoconf
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -86,11 +88,11 @@ teyp veya bir pipe olabilir.
 %patch8 -p1
 %patch9 -p1
 %patch10 -p1
+%patch11 -p1
 chmod -R a+Xr,u+Xw .
 
 %build
 autoconf
-LDFLAGS="-s"; export LDFLAGS 
 %configure 
 
 %{__make}
@@ -100,8 +102,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT 
 	
-gzip -9nf $RPM_BUILD_ROOT{%{_infodir}/cpio*,%{_mandir}/man1/*} \
-	README
+gzip -9nf README
 
 %post
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
