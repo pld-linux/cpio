@@ -5,7 +5,7 @@ Summary(pl):	Program archwizuj±cy na licencji GNU
 Summary(tr):	GNU cpio arþivleme programý
 Name:		cpio
 Version:	2.4.2
-Release:	16
+Release:	17
 Copyright:	GPL
 Group:		Utilities/Archiving
 Group(pl):	Narzêdzia/Archiwizacja
@@ -17,25 +17,38 @@ Patch3:		cpio-info.patch
 Patch4:		cpio-glibc21.patch
 Patch5:		cpio-longlongdev.patch
 Patch6:		cpio-DESTDIR.patch
-Prereq:		/sbin/install-info
+Patch7:		cpio-stdout.patch
+Patch8:		cpio-emptylink.patch
+Prereq:		/usr/sbin/fix-info-dir
 Buildroot:	/tmp/%{name}-%{version}-root
 
 %define		_exec_prefix	/
 
 %description
-cpio copies files into or out of a cpio or tar archive, which is a
-file that contains other files plus information about them, such as
-their file name, owner, timestamps, and access permissions.  The
-archive can be another file on the disk, a magnetic tape, or a pipe.
-cpio has three operating modes.
+GNU cpio copies files into or out of a cpio or tar archive.  Archives are
+files which contain a collection of other files plus information about them,
+such as their file name, owner, timestamps, and access permissions.  The
+archive can be another file on the disk, a magnetic tape, or a pipe.  GNU
+cpio supports the following archive formats: binary, old ASCII, new ASCII,
+crc, HPUX binary, HPUX old ASCII, old tar and POSIX.1 tar.  By default, cpio
+creates binary format archives, so that they are compatible with older cpio
+programs.  When it is extracting files from archives, cpio automatically
+recognizes which kind of archive it is reading and can read archives created
+on machines with a different byte-order.
+
+Install cpio if you need a program to manage file archives.
 
 %description -l de
-cpio erstellt Kopien von Dateien in oder von einem cpio- oder tar-
-Archiv. Die Dateien enthalten andere Dateien, zusammen mit 
-Informationen über diese - etwa den Dateinamen, den Besitzer, 
-Zeitstempel und Zugriffsrechte. Das Archiv kann eine andere Datei 
-auf der Festplatte, ein Magnetband oder eine Pipe sein. cpio 
-arbeitet mit drei Betriebsarten.
+GNU cpio kopiert Dateien in oder aus einem CPIO- oder Tar-Archiv. Archive
+sind Dateien, die eine Sammlung anderer Dateien und informationen über sie,
+wie Dateiname, Besitzer, Zugriffszeiten und -berechtigungen, enthalten. Das
+Archiv kann eine andere Datei auf der Festplatte sein, oder ein
+Streamerband, oder ein pipe. GNU cpio unterstützt die archiv-Formate binary,
+old ASCII, new ASCII, crc, HPUX binary, HPUX old ASCII, old tar und POSIX.1
+tar. Standardmäßig erzeugt cpio Archive im binary-Format, so daß sie mit
+älteren cpio-Programmen kompatibel sind. Beim Extrahieren von Dateien aus
+Archiven erkennt cpio das Format automatisch, es kann auch Archive lesen,
+die auf Computern mit anderer Byteordnung erzeugt wurden.
 
 %description -l fr
 cpio copie des fichiers dans ou à partir d'une archive tar ou cpio,
@@ -46,10 +59,9 @@ cpio possède trois modes de fonctionnement.
 
 %description -l pl
 cpio kopiuje pliki do/z archiwum cpio lub tar-a, które jest pojedynczym
-zbiorem zawieraj±cym pozosta³e pliki wraz z dodatkowymi
-informacjami jak np. nazwa, w³a¶ciciel, czas modyfikacji i prawa
-dostêpu. Archiwum mo¿e byæ plikiem na dysku, ta¶mie magetycznej, albo
-potokiem. 
+zbiorem zawieraj±cym pozosta³e pliki wraz z dodatkowymi informacjami jak np.
+nazwa, w³a¶ciciel, czas modyfikacji i prawa dostêpu. Archiwum mo¿e byæ
+plikiem na dysku, ta¶mie magetycznej, albo potokiem.
 
 %description -l tr
 cpio programý, cpio veya tar arþivlerinden dosya çeker ya da bu arþivlere
@@ -66,6 +78,8 @@ disk üzerinde baþka bir dosya, manyetik bir teyp veya bir pipe olabilir.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
+%patch8 -p1
 
 %build
 LDFLAGS="-s"; export LDFLAGS 
@@ -76,19 +90,16 @@ make
 %install
 rm -rf $RPM_BUILD_ROOT
 
-make install \
-	DESTDIR=$RPM_BUILD_ROOT 
+make install DESTDIR=$RPM_BUILD_ROOT 
 	
 gzip -9nf $RPM_BUILD_ROOT{%{_infodir}/cpio*,%{_mandir}/man1/*} \
 	README
 
 %post
-/sbin/install-info %{_infodir}/cpio.info.gz /etc/info-dir
+/usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
-%preun
-if [ "$1" = "0" ]; then
-	/sbin/install-info --delete %{_infodir}/cpio.info.gz /etc/info-dir
-fi
+%postun
+/usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
 %clean
 rm -rf $RPM_BUILD_ROOT
