@@ -74,7 +74,7 @@ bande ou un tube. cpio possède trois modes de fonctionnement.
 cpio kopiuje pliki do/z archiwum cpio lub tar-a, które jest
 pojedynczym zbiorem zawieraj±cym pozosta³e pliki wraz z dodatkowymi
 informacjami jak np. nazwa, w³a¶ciciel, czas modyfikacji i prawa
-dostêpu. Archiwum mo¿e byæ plikiem na dysku, ta¶mie magetycznej, albo
+dostêpu. Archiwum mo¿e byæ plikiem na dysku, ta¶mie magnetycznej, albo
 potokiem.
 
 %description -l pt_BR
