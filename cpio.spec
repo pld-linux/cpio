@@ -22,6 +22,7 @@ Patch4:		%{name}-errorcode.patch
 Patch5:		%{name}-gethostname_is_in_libc_aka_no_libnsl.patch
 Patch6:		%{name}-man.patch
 Patch7:		%{name}-freebsd.patch
+Patch8:		%{name}-pmake.patch
 BuildRequires:	autoconf
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -110,6 +111,7 @@ cpio коп╕ю╓ файли в або з арх╕ву cpio або tar, який явля╓ собою файл,
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
+%patch8 -p1
 chmod -R a+Xr,u+Xw .
 
 %build
