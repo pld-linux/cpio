@@ -5,7 +5,7 @@ Summary(pl):	Program archwizuj±cy na licencji GNU
 Summary(tr):	GNU cpio arþivleme programý
 Name:		cpio
 Version:	2.4.2
-Release:	13
+Release:	14
 Copyright:	GPL
 Group:		Utilities/Archiving
 Group(pl):	Narzêdzia/Archiwizacja
@@ -101,6 +101,11 @@ rm -rf $RPM_BUILD_ROOT
 /usr/man/man1/*
 
 %changelog
+* Wed Apr 28 1999 Artur Frysiak <wiget@pld.org.pl>
+  [2.4.2-14]
+- added longlongdev.patch from RH 6.0
+ { longlong dev wrong with "-o -H odc" headers (formerly "-oc"). }
+
 * Thu Apr 22 1999 Artur Frysiak <wiget@pld.org.pl>
   [2.4.2-13]
 - compiled on rpm 3
