@@ -110,7 +110,7 @@ teyp veya bir pipe olabilir.
 chmod -R a+Xr,u+Xw .
 
 %build
-autoconf
+%{__autoconf}
 %configure
 
 %{__make}
