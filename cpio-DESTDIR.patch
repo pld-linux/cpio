@@ -1,6 +1,6 @@
-diff -u cpio-2.4.2.old/Makefile.in cpio-2.4.2/Makefile.in
---- cpio-2.4.2.old/Makefile.in	Wed Dec 20 17:28:30 1995
-+++ cpio-2.4.2/Makefile.in	Tue Jun  1 16:59:43 1999
+diff -u cpio-2.5.old/Makefile.in cpio-2.5/Makefile.in
+--- cpio-2.5.old/Makefile.in	Wed Dec 20 17:28:30 1995
++++ cpio-2.5/Makefile.in	Tue Jun  1 16:59:43 1999
 @@ -123,19 +123,19 @@
  	$(CC) -c $(CPPFLAGS) $(DEFS) -I$(srcdir) $(CFLAGS) $<
  
@@ -33,7 +33,7 @@ diff -u cpio-2.4.2.old/Makefile.in cpio-2.4.2/Makefile.in
 @@ -186,14 +186,14 @@
  
  install-info: $(INFO_DEPS)
- 	cd $(srcdir); for file in *.info*; do \
+ 	for file in *.info*; do \
 -	  $(INSTALL_DATA) $$file $(infodir)/$$file; \
 +	  $(INSTALL_DATA) $$file $(DESTDIR)$(infodir)/$$file; \
  	done
@@ -41,7 +41,7 @@ diff -u cpio-2.4.2.old/Makefile.in cpio-2.4.2/Makefile.in
  uninstall:: uninstall-info
  
  uninstall-info:
- 	cd $(srcdir); for file in *.info*; do \
+ 	for file in *.info*; do \
 -	  rm -f $(infodir)/$$file; \
 +	  rm -f $(DESTDIR)$(infodir)/$$file; \
  	done

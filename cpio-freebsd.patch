@@ -1,6 +1,7 @@
---- cpio-2.4.2/copyin.c.fbsd	Mon Oct  1 13:50:04 2001
-+++ cpio-2.4.2/copyin.c	Mon Oct  1 13:50:05 2001
-@@ -13,6 +13,13 @@
+diff -Nur cpio-2.5.orig/copyin.c cpio-2.5/copyin.c
+--- cpio-2.5.orig/copyin.c	Mon Jan 14 00:44:19 2002
++++ cpio-2.5/copyin.c	Sun Sep  1 00:49:09 2002
+@@ -18,6 +18,13 @@
  #include <stdio.h>
  #include <sys/types.h>
  #include <sys/stat.h>
@@ -14,7 +15,7 @@
  #include "filetypes.h"
  #include "system.h"
  #include "cpiohdr.h"
-@@ -28,6 +38,9 @@
+@@ -28,6 +35,9 @@
  #ifndef	FNM_PATHNAME
  #include <fnmatch.h>
  #endif
@@ -22,38 +23,36 @@
 +#include <langinfo.h>
 +#endif
  
- /* Debian hack to fix a bug in the --sparse option.  This bug has been
-    reported to "bug-gnu-utils@prep.ai.mit.edu".  (96/7/10) -BEM */
-@@ -969,13 +982,24 @@
- 		  break;
- 		}
- 	      
--	      res = mknod (file_hdr.c_name, file_hdr.c_mode,
--			makedev (file_hdr.c_rdev_maj, file_hdr.c_rdev_min));
+ #ifndef HAVE_LCHOWN
+ #define lchown chown
+@@ -1146,13 +1156,23 @@
+ 	}
+       return;
+     }
+-  
+-  res = mknod (file_hdr->c_name, file_hdr->c_mode,
++
 +#ifdef CP_IFIFO
-+	      if ((file_hdr.c_mode & CP_IFMT) == CP_IFIFO)
-+		res = mkfifo (file_hdr.c_name, file_hdr.c_mode);
-+	      else
++  if ((file_hdr->c_mode & CP_IFMT) == CP_IFIFO)
++    res = mkfifo (file_hdr->c_name, file_hdr->c_mode);
++  else
 +#endif
-+		res = mknod (file_hdr.c_name, file_hdr.c_mode,
-+		      makedev (file_hdr.c_rdev_maj, file_hdr.c_rdev_min));
- 	      if (res < 0 && create_dir_flag)
- 		{
- 		  create_all_directories (file_hdr.c_name);
--		  res = mknod (file_hdr.c_name, file_hdr.c_mode,
--			makedev (file_hdr.c_rdev_maj, file_hdr.c_rdev_min));
++    res = mknod (file_hdr->c_name, file_hdr->c_mode,
+ 	    makedev (file_hdr->c_rdev_maj, file_hdr->c_rdev_min));
+   if (res < 0 && create_dir_flag)
+     {
+       create_all_directories (file_hdr->c_name);
+-      res = mknod (file_hdr->c_name, file_hdr->c_mode,
 +#ifdef CP_IFIFO
-+		  if ((file_hdr.c_mode & CP_IFMT) == CP_IFIFO)
-+		    res = mkfifo (file_hdr.c_name, file_hdr.c_mode);
-+		  else
++      if ((file_hdr->c_mode & CP_IFMT) == CP_IFIFO)
++	res = mkfifo (file_hdr->c_name, file_hdr->c_mode);
++      else
 +#endif
-+		    res = mknod (file_hdr.c_name, file_hdr.c_mode,
-+				 makedev (file_hdr.c_rdev_maj,
-+					  file_hdr.c_rdev_min));
- 		}
- 	      if (res < 0)
- 		{
-@@ -1087,12 +1111,31 @@
++        res = mknod (file_hdr->c_name, file_hdr->c_mode,
+ 	    makedev (file_hdr->c_rdev_maj, file_hdr->c_rdev_min));
+     }
+   if (res < 0)
+@@ -1238,12 +1258,31 @@
    char mbuf[11];
    char tbuf[40];
    time_t when;
@@ -85,7 +84,7 @@
    strcpy (tbuf, ctime (&when));
    if (current_time - when > 6L * 30L * 24L * 60L * 60L
        || current_time - when < 0L)
-@@ -1102,8 +1145,10 @@
+@@ -1253,8 +1292,10 @@
        strcpy (tbuf + 11, tbuf + 19);
      }
    tbuf[16] = '\0';
@@ -97,13 +96,13 @@
  
  #ifndef __MSDOS__
    if (numeric_uid)
-@@ -1117,13 +1162,12 @@
+@@ -1268,13 +1309,13 @@
  
    if ((file_hdr->c_mode & CP_IFMT) == CP_IFCHR
        || (file_hdr->c_mode & CP_IFMT) == CP_IFBLK)
 -    printf ("%3u, %3u ", file_hdr->c_rdev_maj,
--	    file_hdr->c_rdev_min);
-+    printf ("%3lu, %3lu ", file_hdr->c_rdev_maj, file_hdr->c_rdev_min);
++    printf ("%3lu, %3lu ", file_hdr->c_rdev_maj,
+ 	    file_hdr->c_rdev_min);
    else
  #endif
      printf ("%8lu ", file_hdr->c_filesize);
@@ -113,7 +112,7 @@
  
    print_name_with_quoting (file_hdr->c_name);
    if (link_name)
-@@ -1179,6 +1223,9 @@
+@@ -1330,6 +1371,9 @@
  	  break;
  
  	default:
@@ -123,7 +122,7 @@
  	  if (c > 040 &&
  #ifdef __MSDOS__
  	      c < 0377 && c != 0177
-@@ -1186,6 +1233,7 @@
+@@ -1337,6 +1381,7 @@
  	      c < 0177
  #endif
  	    )
@@ -131,17 +130,18 @@
  	    putchar (c);
  	  else
  	    printf ("\\%03o", (unsigned int) c);
---- cpio-2.4.2/copyout.c.fbsd	Mon Oct  1 13:50:04 2001
-+++ cpio-2.4.2/copyout.c	Mon Oct  1 13:51:21 2001
-@@ -36,6 +36,7 @@
+diff -Nur cpio-2.5.orig/copyout.c cpio-2.5/copyout.c
+--- cpio-2.5.orig/copyout.c	Sun Sep  1 00:43:11 2002
++++ cpio-2.5/copyout.c	Sun Sep  1 00:52:25 2002
+@@ -35,6 +35,7 @@
+ static void writeout_other_defers ();
  static void writeout_final_defers();
  static void writeout_defered_file ();
- static void check_for_changed_file ();
 +static int check_rdev ();
  
  /* Write out header FILE_HDR, including the file name, to file
     descriptor OUT_DES.  */
-@@ -294,8 +295,32 @@
+@@ -296,8 +297,32 @@
  	  file_hdr.c_uid = file_stat.st_uid;
  	  file_hdr.c_gid = file_stat.st_gid;
  	  file_hdr.c_nlink = file_stat.st_nlink;
@@ -176,7 +176,7 @@
  	  file_hdr.c_mtime = file_stat.st_mtime;
  	  file_hdr.c_filesize = file_stat.st_size;
  	  file_hdr.c_chksum = 0;
-@@ -339,6 +364,23 @@
+@@ -341,6 +366,23 @@
  	      continue;
  	    }
  
@@ -200,7 +200,7 @@
  	  /* Copy the named file to the output.  */
  	  switch (file_hdr.c_mode & CP_IFMT)
  	    {
-@@ -822,6 +864,102 @@
+@@ -825,3 +867,98 @@
    return;
  }
  
@@ -299,13 +299,10 @@
 +  }
 +  return 0;
 +}
-+
- static void
- check_for_changed_file (name, header)
-      char *name;
---- cpio-2.4.2/copypass.c.fbsd	Mon Oct  1 13:50:05 2001
-+++ cpio-2.4.2/copypass.c	Mon Oct  1 13:50:05 2001
-@@ -311,13 +311,23 @@
+diff -Nur cpio-2.5.orig/copypass.c cpio-2.5/copypass.c
+--- cpio-2.5.orig/copypass.c	Fri Dec  7 02:03:34 2001
++++ cpio-2.5/copypass.c	Sun Sep  1 00:53:14 2002
+@@ -317,13 +317,23 @@
  
  	  if (link_res < 0)
  	    {
@@ -333,10 +330,10 @@
  		}
  	      if (res < 0)
  		{
---- cpio-2.4.2/main.c.fbsd	Mon Oct  1 13:50:05 2001
-+++ cpio-2.4.2/main.c	Mon Oct  1 13:50:05 2001
-@@ -19,7 +19,13 @@
- #include <stdio.h>
+diff -Nur cpio-2.5.orig/main.c cpio-2.5/main.c
+--- cpio-2.5.orig/main.c	Sun Sep  1 00:43:11 2002
++++ cpio-2.5/main.c	Sun Sep  1 00:54:17 2002
+@@ -23,6 +23,12 @@
  #include <getopt.h>
  #include <sys/types.h>
  #include <sys/stat.h>
@@ -349,14 +346,7 @@
  #include "filetypes.h"
  #include "system.h"
  #include "cpiohdr.h"
-@@ -508,13 +516,16 @@
-   bzero (zeros_512, 512);
- }
- 
--void
-+int
- main (argc, argv)
-      int argc;
+@@ -514,7 +520,10 @@
       char *argv[];
  {
    program_name = argv[0];
@@ -368,7 +358,7 @@
  
  #ifdef __TURBOC__
    _fmode = O_BINARY;		/* Put stdin and stdout in binary mode.  */
-@@ -525,6 +536,7 @@
+@@ -525,6 +534,7 @@
  #endif
  
    process_args (argc, argv);
@@ -376,14 +366,15 @@
  
    initialize_buffers ();
  
---- cpio-2.4.2/util.c.fbsd	Mon Oct  1 13:50:05 2001
-+++ cpio-2.4.2/util.c	Mon Oct  1 13:50:05 2001
-@@ -883,9 +883,9 @@
+diff -Nur cpio-2.5.orig/util.c cpio-2.5/util.c
+--- cpio-2.5.orig/util.c	Fri Dec  7 02:08:30 2001
++++ cpio-2.5/util.c	Sun Sep  1 00:54:39 2002
+@@ -906,9 +906,9 @@
      fprintf (tty_out, "%s%d%s", new_media_message_with_number, reel_number,
  	     new_media_message_after_number);
    else if (archive_name)
 -    fprintf (tty_out, "Found end of tape.  Load next tape and press RETURN. ");
-+    fprintf (tty_out, "Found end of volume.  Load next volume and press RETURN. ");
++    fprintf (tty_out, "Found end of volume.  Load next tape and press RETURN. ");
    else
 -    fprintf (tty_out, "Found end of tape.  To continue, type device/file name when ready.\n");
 +    fprintf (tty_out, "Found end of volume.  To continue, type device/file name when ready.\n");

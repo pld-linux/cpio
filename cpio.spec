@@ -6,25 +6,20 @@ Summary(pl):	Program archwizuj±cy na licencji GNU
 Summary(pt_BR):	Programa de empacotamento cpio da GNU (usado pelo utilitário rpm)
 Summary(tr):	GNU cpio arþivleme programý
 Name:		cpio
-Version:	2.4.2
-Release:	27
-License:	GPL
+Version:	2.5
+Release:	1
+License:	GPL v2+
 Group:		Applications/Archiving
 Source0:	ftp://prep.ai.mit.edu/pub/gnu/cpio/%{name}-%{version}.tar.gz
-Patch0:		%{name}-glibc.patch
-Patch1:		%{name}-mtime.patch
-Patch2:		%{name}-svr4compat.patch
-Patch3:		%{name}-info.patch
-Patch4:		%{name}-glibc21.patch
-Patch5:		%{name}-longlongdev.patch
-Patch6:		%{name}-DESTDIR.patch
-Patch8:		%{name}-emptylink.patch
-Patch9:		%{name}-errorcode.patch
-Patch10:	%{name}-gethostname_is_in_libc_aka_no_libnsl.patch
-Patch11:	%{name}-man.patch
-Patch12:	%{name}-debian36.patch
-Patch13:	%{name}-freebsd.patch
-Patch14:	%{name}-bug56346.patch
+Source1:	%{name}-non-english-man-pages.tar.bz2
+Patch0:		%{name}-mtime.patch
+Patch1:		%{name}-svr4compat.patch
+Patch2:		%{name}-info.patch
+Patch3:		%{name}-DESTDIR.patch
+Patch4:		%{name}-errorcode.patch
+Patch5:		%{name}-gethostname_is_in_libc_aka_no_libnsl.patch
+Patch6:		%{name}-man.patch
+Patch7:		%{name}-freebsd.patch
 BuildRequires:	autoconf
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -56,12 +51,12 @@ kompatibel sind. Beim Extrahieren von Dateien aus Archiven erkennt
 cpio das Format automatisch, es kann auch Archive lesen, die auf
 Computern mit anderer Byteordnung erzeugt wurden.
 
-%description -l pt_BR
-cpio copia arquivos para dentro ou para fora ou de um "archive" cpio
-ou tar, que é um arquivo que contém outros arquivos mais informações
-sobre eles, como o seu nome de arquivo, dono e permissões de acesso. O
-"archive" pode ser outro arquivo no disco, uma fita magnética ou um
-pipe. cpio possui três modos de operação.
+%description -l es
+cpio copia archivos para dentro o para fuera, o de un "archive" cpio o
+tar, que es un archivo que contiene otros archivos, más información
+sobre ellos, como su nombre de archivo, dueño y permisos de acceso.
+"archive" puede ser otro archivo en el disco, una cinta magnética o un
+pipe. cpio posee tres modos de operación.
 
 %description -l fr
 cpio copie des fichiers dans ou à partir d'une archive tar ou cpio,
@@ -77,12 +72,12 @@ informacjami jak np. nazwa, w³a¶ciciel, czas modyfikacji i prawa
 dostêpu. Archiwum mo¿e byæ plikiem na dysku, ta¶mie magetycznej, albo
 potokiem.
 
-%description -l es
-cpio copia archivos para dentro o para fuera, o de un "archive" cpio o
-tar, que es un archivo que contiene otros archivos, más información
-sobre ellos, como su nombre de archivo, dueño y permisos de acceso.
-"archive" puede ser otro archivo en el disco, una cinta magnética o un
-pipe. cpio posee tres modos de operación.
+%description -l pt_BR
+cpio copia arquivos para dentro ou para fora ou de um "archive" cpio
+ou tar, que é um arquivo que contém outros arquivos mais informações
+sobre eles, como o seu nome de arquivo, dono e permissões de acesso. O
+"archive" pode ser outro arquivo no disco, uma fita magnética ou um
+pipe. cpio possui três modos de operação.
 
 %description -l tr
 cpio programý, cpio veya tar arþivlerinden dosya çeker ya da bu
@@ -100,13 +95,7 @@ teyp veya bir pipe olabilir.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
-%patch8 -p1
-%patch9 -p1
-%patch10 -p1
-%patch11 -p1
-%patch12 -p1
-%patch13 -p1
-%patch14 -p1
+%patch7 -p1
 chmod -R a+Xr,u+Xw .
 
 %build
@@ -120,7 +109,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
-gzip -9nf README
+bzip2 -dc %{SOURCE1} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
+
+%clean
+rm -rf $RPM_BUILD_ROOT
 
 %post
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
@@ -128,12 +120,12 @@ gzip -9nf README
 %postun
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %files
 %defattr(644,root,root,755)
-%doc README.gz
+%doc README
 %attr(755,root,root) /bin/cpio
 %{_infodir}/cpio*
-%{_mandir}/man1/cpio.*
+%{_mandir}/man1/cpio.1*
+%lang(es) %{_mandir}/es/man1/cpio.1*
+%lang(hu) %{_mandir}/hu/man1/cpio.1*
+%lang(ja) %{_mandir}/ja/man1/cpio.1*
