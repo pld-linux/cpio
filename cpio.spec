@@ -19,7 +19,6 @@ Patch5:		cpio-longlongdev.patch
 Patch6:		cpio-DESTDIR.patch
 Patch7:		cpio-stdout.patch
 Patch8:		cpio-emptylink.patch
-Prereq:		/usr/sbin/fix-info-dir
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_exec_prefix	/
@@ -96,10 +95,10 @@ gzip -9nf $RPM_BUILD_ROOT{%{_infodir}/cpio*,%{_mandir}/man1/*} \
 	README
 
 %post
-/usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
+[ -x /usr/sbin/fix-info-dir ] && /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
 %postun
-/usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
+[ -x /usr/sbin/fix-info-dir ] && /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
 %clean
 rm -rf $RPM_BUILD_ROOT
