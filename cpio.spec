@@ -14,7 +14,7 @@ License:	GPL v2+
 Group:		Applications/Archiving
 Source0:	ftp://ftp.gnu.org/pub/gnu/cpio/%{name}-%{version}.tar.gz
 #Source0-md5:	e02859af1bbbbd73fcbf757acb57e0a4
-Source1:	%{name}-non-english-man-pages.tar.bz2
+Source1:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-non-english-man-pages.tar.bz2
 #Source1-md5:	027552f4053477462a09fadc162a5e65
 Patch0:		%{name}-mtime.patch
 Patch1:		%{name}-svr4compat.patch
