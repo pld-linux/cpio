@@ -4,7 +4,9 @@ Summary(es):	Programa de empaquetado cpio de la GNU (usado por el utilitario rpm
 Summary(fr):	Programme d'archivage cpio de GNU
 Summary(pl):	Program archwizuj╠cy na licencji GNU
 Summary(pt_BR):	Programa de empacotamento cpio da GNU (usado pelo utilitАrio rpm)
+Summary(ru):	Архивная программа GNU
 Summary(tr):	GNU cpio arЧivleme programЩ
+Summary(uk):	Арх╕вна програма GNU
 Name:		cpio
 Version:	2.5
 Release:	1
@@ -41,9 +43,9 @@ machines with a different byte-order.
 %description -l de
 GNU cpio kopiert Dateien in oder aus einem CPIO- oder Tar-Archiv.
 Archive sind Dateien, die eine Sammlung anderer Dateien und
-informationen Эber sie, wie Dateiname, Besitzer, Zugriffszeiten
-und -berechtigungen, enthalten. Das Archiv kann eine andere Datei auf
-der Festplatte sein, oder ein Streamerband, oder ein pipe. GNU cpio
+informationen Эber sie, wie Dateiname, Besitzer, Zugriffszeiten und
+-berechtigungen, enthalten. Das Archiv kann eine andere Datei auf der
+Festplatte sein, oder ein Streamerband, oder ein pipe. GNU cpio
 unterstЭtzt die archiv-Formate binary, old ASCII, new ASCII, crc, HPUX
 binary, HPUX old ASCII, old tar und POSIX.1 tar. StandardmДъig erzeugt
 cpio Archive im binary-Format, so daъ sie mit Дlteren cpio-Programmen
@@ -79,12 +81,24 @@ sobre eles, como o seu nome de arquivo, dono e permissУes de acesso. O
 "archive" pode ser outro arquivo no disco, uma fita magnИtica ou um
 pipe. cpio possui trЙs modos de operaГЦo.
 
+%description -l ru
+cpio копирует файлы в или из архива cpio или tar, который представляет
+собой файл, содержащий другие файлы и информацию о них, такую как имя
+файла, его хозяин, время создания, права доступа и т.д. Архивом может
+быть файл, лента или пайп.
+
 %description -l tr
 cpio programЩ, cpio veya tar arЧivlerinden dosya Гeker ya da bu
 arЧivlere dosya koyar. Bu arЧivler, dosyalarЩn iГeriПinden ve ayrЩca
 dosyanЩn adЩ, sahibi, zaman bilgileri ve eriЧim haklarЩ gibi
 bilgilerden oluЧur. ArЧiv, disk Эzerinde baЧka bir dosya, manyetik bir
 teyp veya bir pipe olabilir.
+
+%description -l uk
+cpio коп╕ю╓ файли в або з арх╕ву cpio або tar, який явля╓ собою файл,
+що м╕стить ╕нш╕ файли та ╕нформац╕ю про них, таку як ╕м'я файлу, його
+власника, час створення, права доступу ╕ т.╕. Арх╕вом може бути файл,
+стр╕чка або пайп.
 
 %prep
 %setup -q
@@ -129,3 +143,4 @@ rm -rf $RPM_BUILD_ROOT
 %lang(es) %{_mandir}/es/man1/cpio.1*
 %lang(hu) %{_mandir}/hu/man1/cpio.1*
 %lang(ja) %{_mandir}/ja/man1/cpio.1*
+%lang(pt_BR) %{_mandir}/pt_BR/man1/cpio.1*
