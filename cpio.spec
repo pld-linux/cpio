@@ -5,7 +5,7 @@ Summary(pl):	Program archwizuj±cy na licencji GNU
 Summary(tr):	GNU cpio arþivleme programý
 Name:		cpio
 Version:	2.4.2
-Release:	14
+Release:	15
 Copyright:	GPL
 Group:		Utilities/Archiving
 Group(pl):	Narzêdzia/Archiwizacja
@@ -64,9 +64,11 @@ disk üzerinde baþka bir dosya, manyetik bir teyp veya bir pipe olabilir.
 %patch5 -p1
 
 %build
+chmod u+w configure
+autoconf
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
 ./configure %{_target} \
-	--prefix=/usr \
+	--prefix=%{_prefix} \
 	--bindir=/bin \
 	--libexecdir=/sbin
 make
@@ -75,11 +77,11 @@ make
 rm -rf $RPM_BUILD_ROOT
 
 make install \
-	prefix=$RPM_BUILD_ROOT/usr \
+	prefix=$RPM_BUILD_ROOT%{_prefix} \
 	bindir=$RPM_BUILD_ROOT/bin \
 	libexecdir=$RPM_BUILD_ROOT/sbin
 	
-gzip -9nf $RPM_BUILD_ROOT/usr/{info/cpio*,man/man1/*} \
+gzip -9nf $RPM_BUILD_ROOT{%{_infodir}/cpio*,%{_mandir}/man1/*} \
 	README
 
 %post
@@ -101,55 +103,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 
 %changelog
-* Wed Apr 28 1999 Artur Frysiak <wiget@pld.org.pl>
-  [2.4.2-14]
-- added longlongdev.patch from RH 6.0
- { longlong dev wrong with "-o -H odc" headers (formerly "-oc"). }
-
-* Thu Apr 22 1999 Artur Frysiak <wiget@pld.org.pl>
-  [2.4.2-13]
-- compiled on rpm 3
-- gzipped docs
-
-* Thu Mar 11 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [2.4.2-12]
-- added "Conflicts: glibc <= 2.0.7" for installing cpio in proper enviroment,
-- added cpio-glibc21.patch,
-- removed man group from man pages.
-
-* Tue Jan 26 1999 Micha³ Kuratczyk <kurkens@polbox.com>
-- added "Group(pl)"
-- cosmetics changes in %files
-- fixed pl translation
-
-* Thu Dec 29 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [2.4.2-11]
-- added %post, %postun with {un}registering info pages (also patch
-  cpio-info.patch),
-- added gzipping man pages,
-- added LDFLAGS="-s" to ./configure enviroment.
-
-* Wed Sep 23 1998 Marcin Korzonek <mkorz@shadow.eu.org>
-  [2.4.2-10]
-- added pl translation.
-
-* Tue Jul 14 1998 Jeff Johnson <jbj@redhat.com>
-- Fiddle bindir/libexecdir to get RH install correct.
-- Don't include /sbin/rmt -- use the rmt from dump package.
-- Don't include /bin/mt -- use the mt from mt-st package.
-- Add prereq's
-
-* Tue Jun 30 1998 Jeff Johnson <jbj@redhat.com>
-- fix '-c' to duplicate svr4 behavior (problem #438)
-- install support programs & info pages
-
-* Mon Apr 27 1998 Prospector System <bugs@redhat.com>
-- translations modified for de, fr, tr
-
-* Fri Oct 17 1997 Donnie Barnes <djb@redhat.com>
-- added BuildRoot
-- removed "(used by RPM)" comment in Summary
-
-* Thu Jun 19 1997 Erik Troan <ewt@redhat.com>
-- built against glibc
-- no longer statically linked as RPM doesn't use cpio for unpacking packages
+* Sat May 29 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [2.4.2-15]
+- based on RH spec,
+- spec rewrited by PLD team,
+- pl translation by Micha³ Kuratczyk <kurkens@polbox.com>.
