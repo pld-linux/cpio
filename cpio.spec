@@ -5,20 +5,21 @@ Summary(pl):	Program archwizuj±cy na licencji GNU
 Summary(tr):	GNU cpio arþivleme programý
 Name:		cpio
 Version:	2.4.2
-Release:	17
+Release:	20
 License:	GPL
 Group:		Utilities/Archiving
 Group(pl):	Narzêdzia/Archiwizacja
 Source0:	ftp://prep.ai.mit.edu/pub/gnu/cpio/%{name}-%{version}.tar.gz
-Patch0:		cpio-glibc.patch
-Patch1:		cpio-mtime.patch
-Patch2:		cpio-svr4compat.patch
-Patch3:		cpio-info.patch
-Patch4:		cpio-glibc21.patch
-Patch5:		cpio-longlongdev.patch
-Patch6:		cpio-DESTDIR.patch
-Patch7:		cpio-stdout.patch
-Patch8:		cpio-emptylink.patch
+Patch0:		%{name}-glibc.patch
+Patch1:		%{name}-mtime.patch
+Patch2:		%{name}-svr4compat.patch
+Patch3:		%{name}-info.patch
+Patch4:		%{name}-glibc21.patch
+Patch5:		%{name}-longlongdev.patch
+Patch6:		%{name}-DESTDIR.patch
+Patch7:		%{name}-stdout.patch
+Patch8:		%{name}-emptylink.patch
+Patch9:		%{name}-errorcode.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_exec_prefix	/
@@ -83,6 +84,7 @@ teyp veya bir pipe olabilir.
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%patch9 -p1
 
 %build
 LDFLAGS="-s"; export LDFLAGS 
