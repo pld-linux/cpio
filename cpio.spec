@@ -5,14 +5,15 @@ Summary(pl): Program archwizuj±cy GNU
 Summary(tr): GNU cpio arþivleme programý
 Name:        cpio
 Version:     2.4.2
-Release:     10
+Release:     11
 Copyright:   GPL
 Group:       Utilities/Archiving
 Source:      ftp://prep.ai.mit.edu/pub/gnu/%{name}-%{version}.tar.gz
-Patch1:      cpio-2.4.2-glibc.patch
-Patch2:      cpio-2.4.2-mtime.patch
-Patch3:      cpio-2.4.2-svr4compat.patch
-Prereq:      /sbin/install-info /sbin/rmt
+Patch0:      cpio-glibc.patch
+Patch1:      cpio-mtime.patch
+Patch2:      cpio-svr4compat.patch
+Patch3:      cpio-info.patch
+Prereq:      /sbin/install-info
 Buildroot:   /tmp/%{name}-%{version}-root
 
 %description
@@ -52,13 +53,14 @@ disk üzerinde baþka bir dosya, manyetik bir teyp veya bir pipe olabilir.
 
 %prep
 %setup -q
-# patch 0 not applied
+%patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1 -b .svr4compat
+%patch3 -p1
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" ./configure \
+CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
+./configure \
 	--prefix=/usr \
 	--bindir=/bin \
 	--libexecdir=/sbin
@@ -66,20 +68,40 @@ make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/{bin,usr/man/man1}
 
-install -s cpio $RPM_BUILD_ROOT/bin/cpio
-install cpio.1 $RPM_BUILD_ROOT/usr/man/man1/cpio.1
+make install \
+	prefix=$RPM_BUILD_ROOT/usr \
+	bindir=$RPM_BUILD_ROOT/bin \
+	libexecdir=$RPM_BUILD_ROOT/sbin
+	
+gzip -9nf $RPM_BUILD_ROOT/usr/{info/cpio*,man/man1/*}
+
+%post
+/sbin/install-info /usr/info/cpio.info.gz /etc/info-dir
+
+%preun
+if [ $1 = 0 ]; then
+	/sbin/install-info --delete /usr/info/cpio.info.gz /etc/info-dir
+fi
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%attr(644, root, root, 755) %doc README
+%defattr(644, root, root, 755)
+%doc README
 %attr(755, root, root) /bin/cpio
-%attr(644, root,  man) /usr/man/man1/cpio.1
+/usr/info/cpio*
+%attr(644, root,  man) /usr/man/man1/cpio.1.gz
 
 %changelog
+* Thu Dec 29 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [2.4.2-11]
+- added %post, %postun with {un}registering info pages (also patch
+  cpio-info.patch),
+- added gzipping man pages,
+- added LDFLAGS="-s" to ./configure enviroment.
+
 * Wed Sep 23 1998 Marcin Korzonek <mkorz@shadow.eu.org>
   [2.4.2-10]
 - added pl translation.
