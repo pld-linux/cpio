@@ -20,6 +20,8 @@ Patch6:		%{name}-DESTDIR.patch
 Patch7:		%{name}-stdout.patch
 Patch8:		%{name}-emptylink.patch
 Patch9:		%{name}-errorcode.patch
+Patch10:	%{name}-gethostname_is_in_libc_aka_no_libnsl.patch
+BuildRequires:	autoconf
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_exec_prefix	/
@@ -85,8 +87,11 @@ teyp veya bir pipe olabilir.
 %patch7 -p1
 %patch8 -p1
 %patch9 -p1
+%patch10 -p1
+chmod -R a+Xr,u+Xw .
 
 %build
+autoconf
 LDFLAGS="-s"; export LDFLAGS 
 %configure 
 
