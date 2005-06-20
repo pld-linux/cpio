@@ -1,3 +1,5 @@
+# TODO
+# - security http://security.gentoo.org/glsa/glsa-200506-16.xml
 Summary:	GNU cpio archiving program
 Summary(de):	GNU-cpio-Archivierungsprogramm
 Summary(es):	Programa de empaquetado cpio de la GNU (usado por el utilitario rpm)
