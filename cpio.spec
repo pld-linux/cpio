@@ -11,7 +11,7 @@ Summary(tr):	GNU cpio arЧivleme programЩ
 Summary(uk):	Арх╕вна програма GNU
 Name:		cpio
 Version:	2.6
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Applications/Archiving
 Source0:	ftp://ftp.gnu.org/gnu/cpio/%{name}-%{version}.tar.bz2
@@ -23,6 +23,7 @@ Patch1:		%{name}-gethostname_is_in_libc_aka_no_libnsl.patch
 Patch2:		%{name}-lfs.patch
 Patch3:		%{name}-pl.po-update.patch
 Patch4:		%{name}-locale.patch
+Patch5:		%{name}-CAN_2005_111.patch
 URL:		http://www.gnu.org/software/cpio/
 BuildRequires:	autoconf >= 2.54
 BuildRequires:	automake
@@ -112,6 +113,7 @@ cpio коп╕ю╓ файли в або з арх╕ву cpio або tar, який явля╓ собою файл,
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 rm -f po/stamp-po
 
