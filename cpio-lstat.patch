@@ -1,0 +1,11 @@
+--- cpio-2.6/configure.ac.lstat	2004-12-20 10:46:30.000000000 +0000
++++ cpio-2.6/configure.ac	2005-01-17 11:47:22.000000000 +0000
+@@ -92,7 +92,7 @@
+   AC_CONFIG_LINKS(src/fnmatch.h:headers/fnmatch.h)
+ fi
+ 
+-AC_CHECK_FUNCS(lchown endpwent endgrent setlocale)
++AC_CHECK_FUNCS(lchown endpwent endgrent setlocale lstat)
+ AC_FUNC_VPRINTF
+ AC_FUNC_ALLOCA
+ AC_CHECK_LIB(nsl, gethostname, [LIBS="$LIBS -lnsl"])
