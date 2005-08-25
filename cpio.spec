@@ -151,10 +151,10 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README THANKS TODO
-%attr(755,root,root) /bin/cpio
-%{_infodir}/cpio.info*
-%{_mandir}/man1/cpio.1*
+%attr(755,root,root) %{_bindir}/cpio
 %lang(es) %{_mandir}/es/man1/cpio.1*
 %lang(hu) %{_mandir}/hu/man1/cpio.1*
 %lang(ja) %{_mandir}/ja/man1/cpio.1*
 %lang(pt_BR) %{_mandir}/pt_BR/man1/cpio.1*
+%{_infodir}/cpio.info*
+%{_mandir}/man1/cpio.1*
