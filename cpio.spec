@@ -11,7 +11,7 @@ Summary(tr):	GNU cpio arЧivleme programЩ
 Summary(uk):	Арх╕вна програма GNU
 Name:		cpio
 Version:	2.6
-Release:	3
+Release:	4
 License:	GPL v2+
 Group:		Applications/Archiving
 Source0:	ftp://ftp.gnu.org/gnu/cpio/%{name}-%{version}.tar.bz2
