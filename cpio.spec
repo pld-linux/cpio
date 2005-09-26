@@ -25,6 +25,7 @@ Patch3:		%{name}-pl.po-update.patch
 Patch4:		%{name}-locale.patch
 Patch5:		%{name}-CAN_2005_111.patch
 Patch6:		%{name}-lstat.patch
+Patch7:		%{name}-CAN_1999_1572.patch
 URL:		http://www.gnu.org/software/cpio/
 BuildRequires:	autoconf >= 2.54
 BuildRequires:	automake
@@ -116,6 +117,7 @@ cpio коп╕ю╓ файли в або з арх╕ву cpio або tar, який явля╓ собою файл,
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
 
 rm -f po/stamp-po
 
