@@ -1,5 +1,3 @@
-# TODO
-# - security http://security.gentoo.org/glsa/glsa-200506-16.xml
 Summary:	GNU cpio archiving program
 Summary(de):	GNU-cpio-Archivierungsprogramm
 Summary(es):	Programa de empaquetado cpio de la GNU (usado por el utilitario rpm)
@@ -26,6 +24,7 @@ Patch4:		%{name}-locale.patch
 Patch5:		%{name}-CAN_2005_111.patch
 Patch6:		%{name}-lstat.patch
 Patch7:		%{name}-CAN_1999_1572.patch
+Patch8:		%{name}-safer_name_suffix.patch
 URL:		http://www.gnu.org/software/cpio/
 BuildRequires:	autoconf >= 2.54
 BuildRequires:	automake
@@ -118,6 +117,7 @@ cpio коп╕ю╓ файли в або з арх╕ву cpio або tar, який явля╓ собою файл,
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
+%patch8 -p1
 
 rm -f po/stamp-po
 
