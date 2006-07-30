@@ -120,6 +120,7 @@ cpio коп╕ю╓ файли в або з арх╕ву cpio або tar, який явля╓ собою файл,
 %patch8 -p1
 
 rm -f po/stamp-po
+rm m4/{gettext,po}_gl.m4
 
 %build
 %{__gettextize}
