@@ -8,27 +8,21 @@ Summary(ru):	Архивная программа GNU
 Summary(tr):	GNU cpio arЧivleme programЩ
 Summary(uk):	Арх╕вна програма GNU
 Name:		cpio
-Version:	2.6
-Release:	4
+Version:	2.7
+Release:	1
 License:	GPL v2+
 Group:		Applications/Archiving
 Source0:	ftp://ftp.gnu.org/gnu/cpio/%{name}-%{version}.tar.bz2
-# Source0-md5:	25e0e8725bc60ed3460c9cde92752674
+# Source0-md5:	69ad6cb3d288aafe5f969f68d9fd0fb7
 Source1:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-non-english-man-pages.tar.bz2
 # Source1-md5:	027552f4053477462a09fadc162a5e65
 Patch0:		%{name}-info.patch
-Patch1:		%{name}-gethostname_is_in_libc_aka_no_libnsl.patch
-Patch2:		%{name}-lfs.patch
-Patch3:		%{name}-pl.po-update.patch
-Patch4:		%{name}-locale.patch
-Patch5:		%{name}-CAN_2005_111.patch
-Patch6:		%{name}-lstat.patch
-Patch7:		%{name}-CAN_1999_1572.patch
-Patch8:		%{name}-safer_name_suffix.patch
+Patch1:		%{name}-locale.patch
+Patch2:		%{name}-CAN_2005_111.patch
 URL:		http://www.gnu.org/software/cpio/
-BuildRequires:	autoconf >= 2.54
-BuildRequires:	automake
-BuildRequires:	gettext-devel >= 0.13
+BuildRequires:	autoconf >= 2.59
+BuildRequires:	automake >= 1:1.8
+BuildRequires:	gettext-devel >= 0.16
 BuildRequires:	texinfo
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -112,15 +106,8 @@ cpio коп╕ю╓ файли в або з арх╕ву cpio або tar, який явля╓ собою файл,
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
-%patch8 -p1
 
 rm -f po/stamp-po
-rm m4/{gettext,po}_gl.m4
 
 %build
 %{__gettextize}
