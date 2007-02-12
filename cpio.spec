@@ -1,12 +1,12 @@
 Summary:	GNU cpio archiving program
-Summary(de):	GNU-cpio-Archivierungsprogramm
-Summary(es):	Programa de empaquetado cpio de la GNU (usado por el utilitario rpm)
-Summary(fr):	Programme d'archivage cpio de GNU
-Summary(pl):	Program archwizuj╠cy na licencji GNU
-Summary(pt_BR):	Programa de empacotamento cpio da GNU (usado pelo utilitАrio rpm)
-Summary(ru):	Архивная программа GNU
-Summary(tr):	GNU cpio arЧivleme programЩ
-Summary(uk):	Арх╕вна програма GNU
+Summary(de.UTF-8):   GNU-cpio-Archivierungsprogramm
+Summary(es.UTF-8):   Programa de empaquetado cpio de la GNU (usado por el utilitario rpm)
+Summary(fr.UTF-8):   Programme d'archivage cpio de GNU
+Summary(pl.UTF-8):   Program archwizujд┘cy na licencji GNU
+Summary(pt_BR.UTF-8):   Programa de empacotamento cpio da GNU (usado pelo utilitц║rio rpm)
+Summary(ru.UTF-8):   п░я─я┘п╦п╡п╫п╟я▐ п©я─п╬пЁя─п╟п╪п╪п╟ GNU
+Summary(tr.UTF-8):   GNU cpio arе÷ivleme programд╠
+Summary(uk.UTF-8):   п░я─я┘я√п╡п╫п╟ п©я─п╬пЁя─п╟п╪п╟ GNU
 Name:		cpio
 Version:	2.7
 Release:	2
@@ -42,65 +42,65 @@ extracting files from archives, cpio automatically recognizes which
 kind of archive it is reading and can read archives created on
 machines with a different byte-order.
 
-%description -l de
+%description -l de.UTF-8
 GNU cpio kopiert Dateien in oder aus einem CPIO- oder Tar-Archiv.
 Archive sind Dateien, die eine Sammlung anderer Dateien und
-informationen Эber sie, wie Dateiname, Besitzer, Zugriffszeiten und
+informationen ц╪ber sie, wie Dateiname, Besitzer, Zugriffszeiten und
 -berechtigungen, enthalten. Das Archiv kann eine andere Datei auf der
 Festplatte sein, oder ein Streamerband, oder ein pipe. GNU cpio
-unterstЭtzt die archiv-Formate binary, old ASCII, new ASCII, crc, HPUX
-binary, HPUX old ASCII, old tar und POSIX.1 tar. StandardmДъig erzeugt
-cpio Archive im binary-Format, so daъ sie mit Дlteren cpio-Programmen
+unterstц╪tzt die archiv-Formate binary, old ASCII, new ASCII, crc, HPUX
+binary, HPUX old ASCII, old tar und POSIX.1 tar. Standardmц╓ц÷ig erzeugt
+cpio Archive im binary-Format, so daц÷ sie mit ц╓lteren cpio-Programmen
 kompatibel sind. Beim Extrahieren von Dateien aus Archiven erkennt
 cpio das Format automatisch, es kann auch Archive lesen, die auf
 Computern mit anderer Byteordnung erzeugt wurden.
 
-%description -l es
+%description -l es.UTF-8
 cpio copia archivos para dentro o para fuera, o de un "archive" cpio o
-tar, que es un archivo que contiene otros archivos, mАs informaciСn
-sobre ellos, como su nombre de archivo, dueЯo y permisos de acceso.
-"archive" puede ser otro archivo en el disco, una cinta magnИtica o un
-pipe. cpio posee tres modos de operaciСn.
+tar, que es un archivo que contiene otros archivos, mц║s informaciцЁn
+sobre ellos, como su nombre de archivo, dueц╠o y permisos de acceso.
+"archive" puede ser otro archivo en el disco, una cinta magnц╘tica o un
+pipe. cpio posee tres modos de operaciцЁn.
 
-%description -l fr
-cpio copie des fichiers dans ou Ю partir d'une archive tar ou cpio,
+%description -l fr.UTF-8
+cpio copie des fichiers dans ou ц═ partir d'une archive tar ou cpio,
 qui est un fichier contenant d'autres fichiers plus des informations
-sur ceux-ci, comme leur nom, leur propriИtaire, la date et les
-permissions. L'archive peut Йtre un autre fichier sur le disque, une
-bande ou un tube. cpio possХde trois modes de fonctionnement.
+sur ceux-ci, comme leur nom, leur propriц╘taire, la date et les
+permissions. L'archive peut ц╙tre un autre fichier sur le disque, une
+bande ou un tube. cpio possц╗de trois modes de fonctionnement.
 
-%description -l pl
-cpio kopiuje pliki do/z archiwum cpio lub tar-a, ktСre jest
-pojedynczym zbiorem zawieraj╠cym pozostaЁe pliki wraz z dodatkowymi
-informacjami jak np. nazwa, wЁa╤ciciel, czas modyfikacji i prawa
-dostЙpu. Archiwum mo©e byФ plikiem na dysku, ta╤mie magnetycznej, albo
+%description -l pl.UTF-8
+cpio kopiuje pliki do/z archiwum cpio lub tar-a, ktцЁre jest
+pojedynczym zbiorem zawierajд┘cym pozostaе┌e pliki wraz z dodatkowymi
+informacjami jak np. nazwa, wе┌aе⌡ciciel, czas modyfikacji i prawa
+dostд≥pu. Archiwum moе╪e byд┤ plikiem na dysku, taе⌡mie magnetycznej, albo
 potokiem.
 
-%description -l pt_BR
+%description -l pt_BR.UTF-8
 cpio copia arquivos para dentro ou para fora ou de um "archive" cpio
-ou tar, que И um arquivo que contИm outros arquivos mais informaГУes
-sobre eles, como o seu nome de arquivo, dono e permissУes de acesso. O
-"archive" pode ser outro arquivo no disco, uma fita magnИtica ou um
-pipe. cpio possui trЙs modos de operaГЦo.
+ou tar, que ц╘ um arquivo que contц╘m outros arquivos mais informaц╖ц╣es
+sobre eles, como o seu nome de arquivo, dono e permissц╣es de acesso. O
+"archive" pode ser outro arquivo no disco, uma fita magnц╘tica ou um
+pipe. cpio possui trц╙s modos de operaц╖цёo.
 
-%description -l ru
-cpio копирует файлы в или из архива cpio или tar, который представляет
-собой файл, содержащий другие файлы и информацию о них, такую как имя
-файла, его хозяин, время создания, права доступа и т.д. Архивом может
-быть файл, лента или пайп.
+%description -l ru.UTF-8
+cpio п╨п╬п©п╦я─я┐п╣я┌ я└п╟п╧п╩я▀ п╡ п╦п╩п╦ п╦п╥ п╟я─я┘п╦п╡п╟ cpio п╦п╩п╦ tar, п╨п╬я┌п╬я─я▀п╧ п©я─п╣п╢я│я┌п╟п╡п╩я▐п╣я┌
+я│п╬п╠п╬п╧ я└п╟п╧п╩, я│п╬п╢п╣я─п╤п╟я┴п╦п╧ п╢я─я┐пЁп╦п╣ я└п╟п╧п╩я▀ п╦ п╦п╫я└п╬я─п╪п╟я├п╦я▌ п╬ п╫п╦я┘, я┌п╟п╨я┐я▌ п╨п╟п╨ п╦п╪я▐
+я└п╟п╧п╩п╟, п╣пЁп╬ я┘п╬п╥я▐п╦п╫, п╡я─п╣п╪я▐ я│п╬п╥п╢п╟п╫п╦я▐, п©я─п╟п╡п╟ п╢п╬я│я┌я┐п©п╟ п╦ я┌.п╢. п░я─я┘п╦п╡п╬п╪ п╪п╬п╤п╣я┌
+п╠я▀я┌я▄ я└п╟п╧п╩, п╩п╣п╫я┌п╟ п╦п╩п╦ п©п╟п╧п©.
 
-%description -l tr
-cpio programЩ, cpio veya tar arЧivlerinden dosya Гeker ya da bu
-arЧivlere dosya koyar. Bu arЧivler, dosyalarЩn iГeriПinden ve ayrЩca
-dosyanЩn adЩ, sahibi, zaman bilgileri ve eriЧim haklarЩ gibi
-bilgilerden oluЧur. ArЧiv, disk Эzerinde baЧka bir dosya, manyetik bir
+%description -l tr.UTF-8
+cpio programд╠, cpio veya tar arе÷ivlerinden dosya ц╖eker ya da bu
+arе÷ivlere dosya koyar. Bu arе÷ivler, dosyalarд╠n iц╖eriд÷inden ve ayrд╠ca
+dosyanд╠n adд╠, sahibi, zaman bilgileri ve eriе÷im haklarд╠ gibi
+bilgilerden oluе÷ur. Arе÷iv, disk ц╪zerinde baе÷ka bir dosya, manyetik bir
 teyp veya bir pipe olabilir.
 
-%description -l uk
-cpio коп╕ю╓ файли в або з арх╕ву cpio або tar, який явля╓ собою файл,
-що м╕стить ╕нш╕ файли та ╕нформац╕ю про них, таку як ╕м'я файлу, його
-власника, час створення, права доступу ╕ т.╕. Арх╕вом може бути файл,
-стр╕чка або пайп.
+%description -l uk.UTF-8
+cpio п╨п╬п©я√я▌я■ я└п╟п╧п╩п╦ п╡ п╟п╠п╬ п╥ п╟я─я┘я√п╡я┐ cpio п╟п╠п╬ tar, я▐п╨п╦п╧ я▐п╡п╩я▐я■ я│п╬п╠п╬я▌ я└п╟п╧п╩,
+я┴п╬ п╪я√я│я┌п╦я┌я▄ я√п╫я┬я√ я└п╟п╧п╩п╦ я┌п╟ я√п╫я└п╬я─п╪п╟я├я√я▌ п©я─п╬ п╫п╦я┘, я┌п╟п╨я┐ я▐п╨ я√п╪'я▐ я└п╟п╧п╩я┐, п╧п╬пЁп╬
+п╡п╩п╟я│п╫п╦п╨п╟, я┤п╟я│ я│я┌п╡п╬я─п╣п╫п╫я▐, п©я─п╟п╡п╟ п╢п╬я│я┌я┐п©я┐ я√ я┌.я√. п░я─я┘я√п╡п╬п╪ п╪п╬п╤п╣ п╠я┐я┌п╦ я└п╟п╧п╩,
+я│я┌я─я√я┤п╨п╟ п╟п╠п╬ п©п╟п╧п©.
 
 %prep
 %setup -q
