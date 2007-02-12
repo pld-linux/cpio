@@ -1,12 +1,12 @@
 Summary:	GNU cpio archiving program
-Summary(de.UTF-8):   GNU-cpio-Archivierungsprogramm
-Summary(es.UTF-8):   Programa de empaquetado cpio de la GNU (usado por el utilitario rpm)
-Summary(fr.UTF-8):   Programme d'archivage cpio de GNU
-Summary(pl.UTF-8):   Program archwizujący na licencji GNU
-Summary(pt_BR.UTF-8):   Programa de empacotamento cpio da GNU (usado pelo utilitário rpm)
-Summary(ru.UTF-8):   Архивная программа GNU
-Summary(tr.UTF-8):   GNU cpio arşivleme programı
-Summary(uk.UTF-8):   Архівна програма GNU
+Summary(de.UTF-8):	GNU-cpio-Archivierungsprogramm
+Summary(es.UTF-8):	Programa de empaquetado cpio de la GNU (usado por el utilitario rpm)
+Summary(fr.UTF-8):	Programme d'archivage cpio de GNU
+Summary(pl.UTF-8):	Program archwizujący na licencji GNU
+Summary(pt_BR.UTF-8):	Programa de empacotamento cpio da GNU (usado pelo utilitário rpm)
+Summary(ru.UTF-8):	Архивная программа GNU
+Summary(tr.UTF-8):	GNU cpio arşivleme programı
+Summary(uk.UTF-8):	Архівна програма GNU
 Name:		cpio
 Version:	2.7
 Release:	2
