@@ -1,0 +1,4 @@
+- updated for 2.7 [fixes CVE-2005-4268]
+- updated info,locale,CAN_2005_111 patches
+- removed obsolete gethostname*,lfs,pl.po-update,lstat,CAN_1999_1572,safer_name_suffix patches
+- configure.ac needs gettext 0.15, but lib/inttypes_.h needs > 0.15
