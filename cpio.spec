@@ -1,35 +1,28 @@
-# TODO
-# - security http://security.gentoo.org/glsa/glsa-200506-16.xml
 Summary:	GNU cpio archiving program
-Summary(de):	GNU-cpio-Archivierungsprogramm
-Summary(es):	Programa de empaquetado cpio de la GNU (usado por el utilitario rpm)
-Summary(fr):	Programme d'archivage cpio de GNU
-Summary(pl):	Program archwizuj±cy na licencji GNU
-Summary(pt_BR):	Programa de empacotamento cpio da GNU (usado pelo utilitário rpm)
-Summary(ru):	áÒÈÉ×ÎÁÑ ĞÒÏÇÒÁÍÍÁ GNU
-Summary(tr):	GNU cpio arşivleme programı
-Summary(uk):	áÒÈ¦×ÎÁ ĞÒÏÇÒÁÍÁ GNU
+Summary(de.UTF-8):	GNU-cpio-Archivierungsprogramm
+Summary(es.UTF-8):	Programa de empaquetado cpio de la GNU (usado por el utilitario rpm)
+Summary(fr.UTF-8):	Programme d'archivage cpio de GNU
+Summary(pl.UTF-8):	Program archwizujÄ…cy na licencji GNU
+Summary(pt_BR.UTF-8):	Programa de empacotamento cpio da GNU (usado pelo utilitÃ¡rio rpm)
+Summary(ru.UTF-8):	ĞÑ€Ñ…Ğ¸Ğ²Ğ½Ğ°Ñ Ğ¿Ñ€Ğ¾Ğ³Ñ€Ğ°Ğ¼Ğ¼Ğ° GNU
+Summary(tr.UTF-8):	GNU cpio arÅŸivleme programÄ±
+Summary(uk.UTF-8):	ĞÑ€Ñ…Ñ–Ğ²Ğ½Ğ° Ğ¿Ñ€Ğ¾Ğ³Ñ€Ğ°Ğ¼Ğ° GNU
 Name:		cpio
-Version:	2.6
-Release:	4
-License:	GPL v2+
+Version:	2.9
+Release:	1
+License:	GPL v3+
 Group:		Applications/Archiving
 Source0:	ftp://ftp.gnu.org/gnu/cpio/%{name}-%{version}.tar.bz2
-# Source0-md5:	25e0e8725bc60ed3460c9cde92752674
+# Source0-md5:	e387abfdae3a0b9a8a5f762db653a96d
 Source1:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-non-english-man-pages.tar.bz2
 # Source1-md5:	027552f4053477462a09fadc162a5e65
 Patch0:		%{name}-info.patch
-Patch1:		%{name}-gethostname_is_in_libc_aka_no_libnsl.patch
-Patch2:		%{name}-lfs.patch
-Patch3:		%{name}-pl.po-update.patch
-Patch4:		%{name}-locale.patch
-Patch5:		%{name}-CAN_2005_111.patch
-Patch6:		%{name}-lstat.patch
-Patch7:		%{name}-CAN_1999_1572.patch
+Patch1:		%{name}-locale.patch
+Patch2:		%{name}-pl.po-update.patch
 URL:		http://www.gnu.org/software/cpio/
-BuildRequires:	autoconf >= 2.54
-BuildRequires:	automake
-BuildRequires:	gettext-devel >= 0.13
+BuildRequires:	autoconf >= 2.59
+BuildRequires:	automake >= 1:1.8
+BuildRequires:	gettext-devel >= 0.16
 BuildRequires:	texinfo
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -48,76 +41,71 @@ extracting files from archives, cpio automatically recognizes which
 kind of archive it is reading and can read archives created on
 machines with a different byte-order.
 
-%description -l de
+%description -l de.UTF-8
 GNU cpio kopiert Dateien in oder aus einem CPIO- oder Tar-Archiv.
 Archive sind Dateien, die eine Sammlung anderer Dateien und
-informationen über sie, wie Dateiname, Besitzer, Zugriffszeiten und
+informationen Ã¼ber sie, wie Dateiname, Besitzer, Zugriffszeiten und
 -berechtigungen, enthalten. Das Archiv kann eine andere Datei auf der
 Festplatte sein, oder ein Streamerband, oder ein pipe. GNU cpio
-unterstützt die archiv-Formate binary, old ASCII, new ASCII, crc, HPUX
-binary, HPUX old ASCII, old tar und POSIX.1 tar. Standardmäßig erzeugt
-cpio Archive im binary-Format, so daß sie mit älteren cpio-Programmen
+unterstÃ¼tzt die archiv-Formate binary, old ASCII, new ASCII, crc, HPUX
+binary, HPUX old ASCII, old tar und POSIX.1 tar. StandardmÃ¤ÃŸig erzeugt
+cpio Archive im binary-Format, so daÃŸ sie mit Ã¤lteren cpio-Programmen
 kompatibel sind. Beim Extrahieren von Dateien aus Archiven erkennt
 cpio das Format automatisch, es kann auch Archive lesen, die auf
 Computern mit anderer Byteordnung erzeugt wurden.
 
-%description -l es
+%description -l es.UTF-8
 cpio copia archivos para dentro o para fuera, o de un "archive" cpio o
-tar, que es un archivo que contiene otros archivos, más información
-sobre ellos, como su nombre de archivo, dueño y permisos de acceso.
-"archive" puede ser otro archivo en el disco, una cinta magnética o un
-pipe. cpio posee tres modos de operación.
+tar, que es un archivo que contiene otros archivos, mÃ¡s informaciÃ³n
+sobre ellos, como su nombre de archivo, dueÃ±o y permisos de acceso.
+"archive" puede ser otro archivo en el disco, una cinta magnÃ©tica o un
+pipe. cpio posee tres modos de operaciÃ³n.
 
-%description -l fr
-cpio copie des fichiers dans ou à partir d'une archive tar ou cpio,
+%description -l fr.UTF-8
+cpio copie des fichiers dans ou Ã  partir d'une archive tar ou cpio,
 qui est un fichier contenant d'autres fichiers plus des informations
-sur ceux-ci, comme leur nom, leur propriétaire, la date et les
-permissions. L'archive peut être un autre fichier sur le disque, une
-bande ou un tube. cpio possède trois modes de fonctionnement.
+sur ceux-ci, comme leur nom, leur propriÃ©taire, la date et les
+permissions. L'archive peut Ãªtre un autre fichier sur le disque, une
+bande ou un tube. cpio possÃ¨de trois modes de fonctionnement.
 
-%description -l pl
-cpio kopiuje pliki do/z archiwum cpio lub tar-a, które jest
-pojedynczym zbiorem zawieraj±cym pozosta³e pliki wraz z dodatkowymi
-informacjami jak np. nazwa, w³a¶ciciel, czas modyfikacji i prawa
-dostêpu. Archiwum mo¿e byæ plikiem na dysku, ta¶mie magnetycznej, albo
+%description -l pl.UTF-8
+cpio kopiuje pliki do/z archiwum cpio lub tar-a, ktÃ³re jest
+pojedynczym zbiorem zawierajÄ…cym pozostaÅ‚e pliki wraz z dodatkowymi
+informacjami jak np. nazwa, wÅ‚aÅ›ciciel, czas modyfikacji i prawa
+dostÄ™pu. Archiwum moÅ¼e byÄ‡ plikiem na dysku, taÅ›mie magnetycznej, albo
 potokiem.
 
-%description -l pt_BR
+%description -l pt_BR.UTF-8
 cpio copia arquivos para dentro ou para fora ou de um "archive" cpio
-ou tar, que é um arquivo que contém outros arquivos mais informações
-sobre eles, como o seu nome de arquivo, dono e permissões de acesso. O
-"archive" pode ser outro arquivo no disco, uma fita magnética ou um
-pipe. cpio possui três modos de operação.
+ou tar, que Ã© um arquivo que contÃ©m outros arquivos mais informaÃ§Ãµes
+sobre eles, como o seu nome de arquivo, dono e permissÃµes de acesso. O
+"archive" pode ser outro arquivo no disco, uma fita magnÃ©tica ou um
+pipe. cpio possui trÃªs modos de operaÃ§Ã£o.
 
-%description -l ru
-cpio ËÏĞÉÒÕÅÔ ÆÁÊÌÙ × ÉÌÉ ÉÚ ÁÒÈÉ×Á cpio ÉÌÉ tar, ËÏÔÏÒÙÊ ĞÒÅÄÓÔÁ×ÌÑÅÔ
-ÓÏÂÏÊ ÆÁÊÌ, ÓÏÄÅÒÖÁİÉÊ ÄÒÕÇÉÅ ÆÁÊÌÙ É ÉÎÆÏÒÍÁÃÉÀ Ï ÎÉÈ, ÔÁËÕÀ ËÁË ÉÍÑ
-ÆÁÊÌÁ, ÅÇÏ ÈÏÚÑÉÎ, ×ÒÅÍÑ ÓÏÚÄÁÎÉÑ, ĞÒÁ×Á ÄÏÓÔÕĞÁ É Ô.Ä. áÒÈÉ×ÏÍ ÍÏÖÅÔ
-ÂÙÔØ ÆÁÊÌ, ÌÅÎÔÁ ÉÌÉ ĞÁÊĞ.
+%description -l ru.UTF-8
+cpio ĞºĞ¾Ğ¿Ğ¸Ñ€ÑƒĞµÑ‚ Ñ„Ğ°Ğ¹Ğ»Ñ‹ Ğ² Ğ¸Ğ»Ğ¸ Ğ¸Ğ· Ğ°Ñ€Ñ…Ğ¸Ğ²Ğ° cpio Ğ¸Ğ»Ğ¸ tar, ĞºĞ¾Ñ‚Ğ¾Ñ€Ñ‹Ğ¹ Ğ¿Ñ€ĞµĞ´ÑÑ‚Ğ°Ğ²Ğ»ÑĞµÑ‚
+ÑĞ¾Ğ±Ğ¾Ğ¹ Ñ„Ğ°Ğ¹Ğ», ÑĞ¾Ğ´ĞµÑ€Ğ¶Ğ°Ñ‰Ğ¸Ğ¹ Ğ´Ñ€ÑƒĞ³Ğ¸Ğµ Ñ„Ğ°Ğ¹Ğ»Ñ‹ Ğ¸ Ğ¸Ğ½Ñ„Ğ¾Ñ€Ğ¼Ğ°Ñ†Ğ¸Ñ Ğ¾ Ğ½Ğ¸Ñ…, Ñ‚Ğ°ĞºÑƒÑ ĞºĞ°Ğº Ğ¸Ğ¼Ñ
+Ñ„Ğ°Ğ¹Ğ»Ğ°, ĞµĞ³Ğ¾ Ñ…Ğ¾Ğ·ÑĞ¸Ğ½, Ğ²Ñ€ĞµĞ¼Ñ ÑĞ¾Ğ·Ğ´Ğ°Ğ½Ğ¸Ñ, Ğ¿Ñ€Ğ°Ğ²Ğ° Ğ´Ğ¾ÑÑ‚ÑƒĞ¿Ğ° Ğ¸ Ñ‚.Ğ´. ĞÑ€Ñ…Ğ¸Ğ²Ğ¾Ğ¼ Ğ¼Ğ¾Ğ¶ĞµÑ‚
+Ğ±Ñ‹Ñ‚ÑŒ Ñ„Ğ°Ğ¹Ğ», Ğ»ĞµĞ½Ñ‚Ğ° Ğ¸Ğ»Ğ¸ Ğ¿Ğ°Ğ¹Ğ¿.
 
-%description -l tr
-cpio programı, cpio veya tar arşivlerinden dosya çeker ya da bu
-arşivlere dosya koyar. Bu arşivler, dosyaların içeriğinden ve ayrıca
-dosyanın adı, sahibi, zaman bilgileri ve erişim hakları gibi
-bilgilerden oluşur. Arşiv, disk üzerinde başka bir dosya, manyetik bir
+%description -l tr.UTF-8
+cpio programÄ±, cpio veya tar arÅŸivlerinden dosya Ã§eker ya da bu
+arÅŸivlere dosya koyar. Bu arÅŸivler, dosyalarÄ±n iÃ§eriÄŸinden ve ayrÄ±ca
+dosyanÄ±n adÄ±, sahibi, zaman bilgileri ve eriÅŸim haklarÄ± gibi
+bilgilerden oluÅŸur. ArÅŸiv, disk Ã¼zerinde baÅŸka bir dosya, manyetik bir
 teyp veya bir pipe olabilir.
 
-%description -l uk
-cpio ËÏĞ¦À¤ ÆÁÊÌÉ × ÁÂÏ Ú ÁÒÈ¦×Õ cpio ÁÂÏ tar, ÑËÉÊ Ñ×ÌÑ¤ ÓÏÂÏÀ ÆÁÊÌ,
-İÏ Í¦ÓÔÉÔØ ¦ÎÛ¦ ÆÁÊÌÉ ÔÁ ¦ÎÆÏÒÍÁÃ¦À ĞÒÏ ÎÉÈ, ÔÁËÕ ÑË ¦Í'Ñ ÆÁÊÌÕ, ÊÏÇÏ
-×ÌÁÓÎÉËÁ, ŞÁÓ ÓÔ×ÏÒÅÎÎÑ, ĞÒÁ×Á ÄÏÓÔÕĞÕ ¦ Ô.¦. áÒÈ¦×ÏÍ ÍÏÖÅ ÂÕÔÉ ÆÁÊÌ,
-ÓÔÒ¦ŞËÁ ÁÂÏ ĞÁÊĞ.
+%description -l uk.UTF-8
+cpio ĞºĞ¾Ğ¿Ñ–ÑÑ” Ñ„Ğ°Ğ¹Ğ»Ğ¸ Ğ² Ğ°Ğ±Ğ¾ Ğ· Ğ°Ñ€Ñ…Ñ–Ğ²Ñƒ cpio Ğ°Ğ±Ğ¾ tar, ÑĞºĞ¸Ğ¹ ÑĞ²Ğ»ÑÑ” ÑĞ¾Ğ±Ğ¾Ñ Ñ„Ğ°Ğ¹Ğ»,
+Ñ‰Ğ¾ Ğ¼Ñ–ÑÑ‚Ğ¸Ñ‚ÑŒ Ñ–Ğ½ÑˆÑ– Ñ„Ğ°Ğ¹Ğ»Ğ¸ Ñ‚Ğ° Ñ–Ğ½Ñ„Ğ¾Ñ€Ğ¼Ğ°Ñ†Ñ–Ñ Ğ¿Ñ€Ğ¾ Ğ½Ğ¸Ñ…, Ñ‚Ğ°ĞºÑƒ ÑĞº Ñ–Ğ¼'Ñ Ñ„Ğ°Ğ¹Ğ»Ñƒ, Ğ¹Ğ¾Ğ³Ğ¾
+Ğ²Ğ»Ğ°ÑĞ½Ğ¸ĞºĞ°, Ñ‡Ğ°Ñ ÑÑ‚Ğ²Ğ¾Ñ€ĞµĞ½Ğ½Ñ, Ğ¿Ñ€Ğ°Ğ²Ğ° Ğ´Ğ¾ÑÑ‚ÑƒĞ¿Ñƒ Ñ– Ñ‚.Ñ–. ĞÑ€Ñ…Ñ–Ğ²Ğ¾Ğ¼ Ğ¼Ğ¾Ğ¶Ğµ Ğ±ÑƒÑ‚Ğ¸ Ñ„Ğ°Ğ¹Ğ»,
+ÑÑ‚Ñ€Ñ–Ñ‡ĞºĞ° Ğ°Ğ±Ğ¾ Ğ¿Ğ°Ğ¹Ğ¿.
 
 %prep
 %setup -q
+%patch2 -p1
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
 
 rm -f po/stamp-po
 

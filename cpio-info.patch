@@ -1,25 +1,14 @@
---- cpio-2.6.orig/doc/cpio.texi	Wed Dec 20 17:29:34 1995
-+++ cpio-2.6/doc/cpio.texi	Wed Dec 30 02:59:32 1998
-@@ -9,9 +9,10 @@
+--- cpio-2.7/doc/cpio.texi.orig	2006-07-06 15:52:03.000000000 +0200
++++ cpio-2.7/doc/cpio.texi	2006-10-28 13:19:35.667501250 +0200
+@@ -5,9 +5,9 @@
+ @setchapternewpage off
+ @c %**end of header
  
- @ifinfo
- @format
--START-INFO-DIR-ENTRY
--* cpio: (cpio).                 Making tape (or disk) archives.
--END-INFO-DIR-ENTRY
+-@dircategory Archiving
 +@dircategory File utilities:
-+@direntry
-+* cpio: (cpio).				Making tape (or disk) archives
-+@end direntry
- @end format
- @end ifinfo
+ @direntry
+-* Cpio: (cpio).                 Copy-in-copy-out archiver to tape or disk.
++* Cpio: (cpio).				Copy-in-copy-out archiver to tape or disk
+ @end direntry
  
-@@ -77,7 +78,7 @@
- @ifinfo
- @node Top, Introduction, (dir), (dir)
- @comment  node-name,  next,  previous,  up
--@top
-+@top cpio
- 
- GNU cpio is a tool for creating and extracting archives, or copying
- files from one place to another.  It handles a number of cpio formats as
+ @include version.texi

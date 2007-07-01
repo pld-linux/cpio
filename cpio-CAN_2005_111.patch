@@ -1,121 +1,267 @@
---- cpio-2.6/src/copyin.c.chmodRaceC	2005-04-25 13:19:34.079310381 +0200
-+++ cpio-2.6/src/copyin.c	2005-04-25 14:09:32.514889697 +0200
-@@ -389,19 +389,26 @@
+--- cpio-2.7/src/copyin.c.orig	2006-09-27 10:19:44.000000000 +0200
++++ cpio-2.7/src/copyin.c	2006-10-28 19:54:08.474959250 +0200
+@@ -186,7 +186,7 @@
+ 
+ static int
+ try_existing_file(struct cpio_file_stat* file_hdr, int in_file_des,
+-		  int *existing_dir)
++		  int *existing_dir, mode_t *existing_mode)
+ {
+   struct stat file_stat;
+ 
+@@ -200,6 +200,7 @@
+ 	     we are trying to create, don't complain about
+ 	     it.  */
+ 	  *existing_dir = true;
++	  *existing_mode = file_stat.st_mode;
+ 	  return 0;
+ 	}
+       else if (!unconditional_flag
+@@ -387,10 +388,7 @@
  	  continue;
  	}
  
 -      if (close (out_file_des) < 0)
--	error (0, errno, "%s", d->header.c_name);
+-	close_error (d->header.c_name);
 -
-+      /*
-+       *  Avoid race condition.
-+       *  Set chown and chmod before closing the file desc.
-+       *  pvrabec@redhat.com
-+       */
-+       
-       /* File is now copied; set attributes.  */
-       if (!no_chown_flag)
--	if ((chown (d->header.c_name,
-+	if ((fchown (out_file_des,
- 		    set_owner_flag ? set_owner : d->header.c_uid,
- 	       set_group_flag ? set_group : d->header.c_gid) < 0)
- 	    && errno != EPERM)
- 	  error (0, errno, "%s", d->header.c_name);
-       /* chown may have turned off some permissions we wanted. */
--      if (chmod (d->header.c_name, (int) d->header.c_mode) < 0)
-+      if (fchmod (out_file_des, (int) d->header.c_mode) < 0)
-+	error (0, errno, "%s", d->header.c_name);
-+
-+      if (close (out_file_des) < 0)
- 	error (0, errno, "%s", d->header.c_name);
-+
-       if (retain_time_flag)
- 	{
- 	  times.actime = times.modtime = d->header.c_mtime;
-@@ -557,6 +564,25 @@
+-      set_perms (&d->header);
++      set_perms (&d->header, out_file_des);
+     }
+ }
+ 
+@@ -540,8 +538,8 @@
        write (out_file_des, "", 1);
        delayed_seek_count = 0;
      }
-+    
-+  /*
-+   *  Avoid race condition.
-+   *  Set chown and chmod before closing the file desc.
-+   *  pvrabec@redhat.com
-+   */
-+   
-+  /* File is now copied; set attributes.  */
-+  if (!no_chown_flag)
-+    if ((fchown (out_file_des,
-+		set_owner_flag ? set_owner : file_hdr->c_uid,
-+	   set_group_flag ? set_group : file_hdr->c_gid) < 0)
-+	&& errno != EPERM)
-+      error (0, errno, "%s", file_hdr->c_name);
-+  
-+  /* chown may have turned off some permissions we wanted. */
-+  if (fchmod (out_file_des, (int) file_hdr->c_mode) < 0)
-+    error (0, errno, "%s", file_hdr->c_name);
-+     
-   if (close (out_file_des) < 0)
-     error (0, errno, "%s", file_hdr->c_name);
+-  if (close (out_file_des) < 0)
+-    close_error (file_hdr->c_name);
++
++  set_perms (file_hdr, out_file_des);
  
-@@ -567,18 +593,6 @@
+   if (archive_format == arf_crcascii)
+     {
+@@ -550,8 +548,6 @@
  	       file_hdr->c_name, crc, file_hdr->c_chksum);
      }
  
--  /* File is now copied; set attributes.  */
--  if (!no_chown_flag)
--    if ((chown (file_hdr->c_name,
--		set_owner_flag ? set_owner : file_hdr->c_uid,
--	   set_group_flag ? set_group : file_hdr->c_gid) < 0)
--	&& errno != EPERM)
--      error (0, errno, "%s", file_hdr->c_name);
--  
--  /* chown may have turned off some permissions we wanted. */
--  if (chmod (file_hdr->c_name, (int) file_hdr->c_mode) < 0)
--    error (0, errno, "%s", file_hdr->c_name);
--  
-   if (retain_time_flag)
-     {
-       struct utimbuf times;		/* For setting file times.  */
-@@ -589,7 +603,7 @@
-       if (utime (file_hdr->c_name, &times) < 0)
- 	error (0, errno, "%s", file_hdr->c_name);
-     }
--  
-+    
+-  set_perms (file_hdr);
+-
    tape_skip_padding (in_file_des, file_hdr->c_filesize);
    if (file_hdr->c_nlink > 1
        && (archive_format == arf_newascii || archive_format == arf_crcascii) )
---- cpio-2.6/src/copypass.c.chmodRaceC	2004-09-06 14:09:04.000000000 +0200
-+++ cpio-2.6/src/copypass.c	2005-04-25 14:09:38.135076926 +0200
-@@ -181,19 +181,25 @@
+@@ -565,7 +561,7 @@
+ }
+ 
+ static void
+-copyin_directory(struct cpio_file_stat* file_hdr, int existing_dir)
++copyin_directory(struct cpio_file_stat* file_hdr, int existing_dir, mode_t existing_mode)
+ {
+   int res;			/* Result of various function calls.  */
+ #ifdef HPUX_CDF
+@@ -608,14 +604,23 @@
+ 	  cdf_flag = 1;
+ 	}
+ #endif
+-      res = mkdir (file_hdr->c_name, file_hdr->c_mode);
++      res = mkdir (file_hdr->c_name, file_hdr->c_mode & ~077);
+     }
+   else
+-    res = 0;
++    {
++      if (!no_chown_flag && (existing_mode & 077) != 0
++         && chmod (file_hdr->c_name, existing_mode & 07700) < 0)
++       {
++         error (0, errno, "%s: chmod", file_hdr->c_name);
++         return;
++       }
++      res = 0;
++    }
++
+   if (res < 0 && create_dir_flag)
+     {
+       create_all_directories (file_hdr->c_name);
+-      res = mkdir (file_hdr->c_name, file_hdr->c_mode);
++      res = mkdir (file_hdr->c_name, file_hdr->c_mode & ~077);
+     }
+   if (res < 0)
+     {
+@@ -643,7 +648,7 @@
+ 	}
+     }
+ 
+-  set_perms (file_hdr); 
++  set_perms (file_hdr, -1); 
+ }
+ 
+ static void
+@@ -690,12 +695,12 @@
+       return;
+     }
+   
+-  res = mknod (file_hdr->c_name, file_hdr->c_mode,
++  res = mknod (file_hdr->c_name, file_hdr->c_mode & ~077,
+ 	    makedev (file_hdr->c_rdev_maj, file_hdr->c_rdev_min));
+   if (res < 0 && create_dir_flag)
+     {
+       create_all_directories (file_hdr->c_name);
+-      res = mknod (file_hdr->c_name, file_hdr->c_mode,
++      res = mknod (file_hdr->c_name, file_hdr->c_mode & ~077,
+ 	    makedev (file_hdr->c_rdev_maj, file_hdr->c_rdev_min));
+     }
+   if (res < 0)
+@@ -769,9 +774,10 @@
+ copyin_file (struct cpio_file_stat* file_hdr, int in_file_des)
+ {
+   int existing_dir;
++  mode_t existing_mode;
+ 
+   if (!to_stdout_option
+-      && try_existing_file (file_hdr, in_file_des, &existing_dir) < 0)
++      && try_existing_file (file_hdr, in_file_des, &existing_dir, &existing_mode) < 0)
+     return;
+ 
+   /* Do the real copy or link.  */
+@@ -782,7 +788,7 @@
+       break;
+ 
+     case CP_IFDIR:
+-      copyin_directory(file_hdr, existing_dir);
++      copyin_directory(file_hdr, existing_dir, existing_mode);
+       break;
+ 
+     case CP_IFCHR:
+--- cpio-2.7/src/copypass.c.orig	2006-09-27 10:19:43.000000000 +0200
++++ cpio-2.7/src/copypass.c	2006-10-28 20:07:38.341572750 +0200
+@@ -34,12 +34,12 @@
+ 
+ /* A wrapper around set_perms using another set of arguments */
+ static void
+-set_copypass_perms (const char *name, struct stat *st)
++set_copypass_perms (const char *name, struct stat *st, int file_des)
+ {
+   struct cpio_file_stat header;
+   header.c_name = name;
+   stat_to_cpio (&header, st);
+-  set_perms (&header);
++  set_perms (&header, file_des);
+ }
+ 
+ /* Copy files listed on the standard input into directory `directory_name'.
+@@ -194,10 +194,8 @@
  		}
  	      if (close (in_file_des) < 0)
- 		error (0, errno, "%s", input_name.ds_string);
+ 		close_error (input_name.ds_string);
 -	      if (close (out_file_des) < 0)
--		error (0, errno, "%s", output_name.ds_string);
--
-+	      /*
-+	       *  Avoid race condition.
-+	       *  Set chown and chmod before closing the file desc.
-+	       *  pvrabec@redhat.com
-+	       */
- 	      /* Set the attributes of the new file.  */
- 	      if (!no_chown_flag)
--		if ((chown (output_name.ds_string,
-+		if ((fchown (out_file_des,
- 			    set_owner_flag ? set_owner : in_file_stat.st_uid,
- 		      set_group_flag ? set_group : in_file_stat.st_gid) < 0)
- 		    && errno != EPERM)
- 		  error (0, errno, "%s", output_name.ds_string);
- 	      /* chown may have turned off some permissions we wanted. */
--	      if (chmod (output_name.ds_string, in_file_stat.st_mode) < 0)
-+	      if (fchmod (out_file_des, in_file_stat.st_mode) < 0)
-+		error (0, errno, "%s", output_name.ds_string);
-+		
-+	      if (close (out_file_des) < 0)
- 		error (0, errno, "%s", output_name.ds_string);
-+
+-		close_error (output_name.ds_string);
+ 
+-	      set_copypass_perms (input_name.ds_string, &in_file_stat);
++	      set_copypass_perms (output_name.ds_string, &in_file_stat, out_file_des);
+ 
  	      if (reset_time_flag)
+                 {
+@@ -232,15 +230,24 @@
+ 		  cdf_flag = 1;
+ 		}
+ #endif
+-	      res = mkdir (output_name.ds_string, in_file_stat.st_mode);
++	      res = mkdir (output_name.ds_string, in_file_stat.st_mode & ~077);
+ 
+ 	    }
+ 	  else
+-	    res = 0;
++            {
++              if (!no_chown_flag && (out_file_stat.st_mode & 077) != 0
++                  && chmod (output_name.ds_string, out_file_stat.st_mode & 07700) < 0)
++                {
++                  error (0, errno, "%s: chmod", output_name.ds_string);
++                  continue;
++                }
++              res = 0;
++            }
++
+ 	  if (res < 0 && create_dir_flag)
+ 	    {
+ 	      create_all_directories (output_name.ds_string);
+-	      res = mkdir (output_name.ds_string, in_file_stat.st_mode);
++	      res = mkdir (output_name.ds_string, in_file_stat.st_mode & ~077);
+ 	    }
+ 	  if (res < 0)
+ 	    {
+@@ -257,7 +264,7 @@
+ 		  continue;
+ 		}
+ 	    }
+-	  set_copypass_perms (output_name.ds_string, &in_file_stat);
++	  set_copypass_perms (output_name.ds_string, &in_file_stat, -1);
+ 	}
+       else if (S_ISCHR (in_file_stat.st_mode) ||
+ 	       S_ISBLK (in_file_stat.st_mode) ||
+@@ -283,12 +290,12 @@
+ 
+ 	  if (link_res < 0)
+ 	    {
+-	      res = mknod (output_name.ds_string, in_file_stat.st_mode,
++	      res = mknod (output_name.ds_string, in_file_stat.st_mode & ~077,
+ 			   in_file_stat.st_rdev);
+ 	      if (res < 0 && create_dir_flag)
  		{
- 		  times.actime = in_file_stat.st_atime;
+ 		  create_all_directories (output_name.ds_string);
+-		  res = mknod (output_name.ds_string, in_file_stat.st_mode,
++		  res = mknod (output_name.ds_string, in_file_stat.st_mode & ~077,
+ 			       in_file_stat.st_rdev);
+ 		}
+ 	      if (res < 0)
+@@ -296,7 +303,7 @@
+ 		  mknod_error (output_name.ds_string);
+ 		  continue;
+ 		}
+-	      set_copypass_perms (output_name.ds_string, &in_file_stat);
++	      set_copypass_perms (output_name.ds_string, &in_file_stat, -1);
+ 	    }
+ 	}
+ 
+--- cpio-2.7/src/util.c.orig	2006-09-28 10:49:21.000000000 +0200
++++ cpio-2.7/src/util.c	2006-10-28 19:35:33.753293500 +0200
+@@ -1251,18 +1251,30 @@
+ }
+ 
+ void
+-set_perms (struct cpio_file_stat *header)
++set_perms (struct cpio_file_stat *header, int file_des)
+ {
+   if (!no_chown_flag)
+     {
+       uid_t uid = set_owner_flag ? set_owner : header->c_uid;
+       gid_t gid = set_group_flag ? set_group : header->c_gid; 
++      if (file_des == -1) {
+       if ((chown (header->c_name, uid, gid) < 0) && errno != EPERM)
+ 	chown_error_details (header->c_name, uid, gid);
++      } else {
++	 if ((fchown (file_des, uid, gid) < 0) && errno != EPERM)
++	   chown_error_details (header->c_name, uid, gid);
++      }
+     }
+   /* chown may have turned off some permissions we wanted. */
++  if (file_des == -1) {
+   if (chmod (header->c_name, header->c_mode) < 0)
+     chmod_error_details (header->c_name, header->c_mode);
++  } else {
++    if (fchmod (file_des, header->c_mode) < 0)
++      chmod_error_details (header->c_name, header->c_mode);
++    if (close (file_des) < 0)
++      close_error (header->c_name);
++  }
+ #ifdef HPUX_CDF
+   if ((header->c_mode & CP_IFMT) && cdf_flag)
+     /* Once we "hide" the directory with the chmod(),
+--- cpio-2.7/src/extern.h.orig	2006-09-27 10:19:44.000000000 +0200
++++ cpio-2.7/src/extern.h	2006-10-28 20:08:47.861917500 +0200
+@@ -199,7 +199,7 @@
+ # define UMASKED_SYMLINK(name1,name2,mode)    umasked_symlink(name1,name2,mode)
+ #endif /* SYMLINK_USES_UMASK */
+ 
+-void set_perms (struct cpio_file_stat *header);
++void set_perms (struct cpio_file_stat *header, int file_des);
+ void set_file_times (const char *name, unsigned long atime, unsigned long mtime);
+ void stat_to_cpio (struct cpio_file_stat *hdr, struct stat *st);
+ void cpio_safer_name_suffix (char *name, bool link_target,
