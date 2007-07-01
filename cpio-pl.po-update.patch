@@ -1,121 +1,71 @@
---- cpio-2.8/po/pl.po.orig	2007-06-07 13:16:38.000000000 +0200
-+++ cpio-2.8/po/pl.po	2007-06-13 08:04:30.295602275 +0200
-@@ -1,15 +1,15 @@
- # Polish translation for the GNU cpio.
--# Copyright (C) 1996, 2005, 2006 Free Software Foundation, Inc.
-+# Copyright (C) 1996, 2005, 2006, 2007 Free Software Foundation, Inc.
- # This file is distributed under the same license as the cpio package.
- # Pawe³ Krawczyk <kravietz@pipeta.chemia.pk.edu.pl>, 1996.
--# Jakub Bogusz <qboosh@pld-linux.org>, 2005-2006.
-+# Jakub Bogusz <qboosh@pld-linux.org>, 2005-2007.
+--- cpio-2.9/po/pl.po.orig	2007-06-28 18:58:53.000000000 +0200
++++ cpio-2.9/po/pl.po	2007-07-01 11:59:14.760027377 +0200
+@@ -6,10 +6,10 @@
  #
  msgid ""
  msgstr ""
--"Project-Id-Version: cpio 2.6.90\n"
-+"Project-Id-Version: cpio 2.8\n"
+-"Project-Id-Version: cpio 2.8\n"
++"Project-Id-Version: cpio 2.9\n"
  "Report-Msgid-Bugs-To: bug-cpio@gnu.org\n"
- "POT-Creation-Date: 2007-06-07 14:16+0300\n"
--"PO-Revision-Date: 2006-10-12 19:34+0200\n"
-+"PO-Revision-Date: 2007-06-13 07:33+0200\n"
+ "POT-Creation-Date: 2007-06-28 19:58+0300\n"
+-"PO-Revision-Date: 2007-06-13 07:33+0200\n"
++"PO-Revision-Date: 2007-07-01 11:40+0200\n"
  "Last-Translator: Jakub Bogusz <qboosh@pld-linux.org>\n"
  "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
  "MIME-Version: 1.0\n"
-@@ -652,9 +652,9 @@
- msgstr "U¿yto jednocze¶nie -O i -F w trybie copy-out"
+@@ -107,12 +107,12 @@
+ msgstr "standardowe wej¶cie (stdin) jest zamkniête"
  
- #: src/main.c:696
+ #: src/copyin.c:1579 src/copyout.c:894 src/copypass.c:374
 -#, fuzzy, c-format
 +#, c-format
- msgid "Not enough arguments"
--msgstr "Za du¿o argumentów"
-+msgstr "Za ma³o argumentów"
+ msgid "%lu block\n"
+ msgid_plural "%lu blocks\n"
+-msgstr[0] "%d blok\n"
+-msgstr[1] "%d bloki\n"
+-msgstr[2] "%d bloków\n"
++msgstr[0] "%lu blok\n"
++msgstr[1] "%lu bloki\n"
++msgstr[2] "%lu bloków\n"
  
- #: src/main.c:700
+ #: src/copyout.c:51 src/copyout.c:60
  #, c-format
-@@ -767,12 +767,12 @@
- msgstr "B³±d odczytu na pozycji %lld w pliku %s, uzupe³niam zerami"
+@@ -541,7 +541,7 @@
+ msgstr "zawieszenie na SECS sekund (domy¶lnie 3600)"
  
- #: src/util.c:584
+ #: src/main.c:250
 -#, fuzzy, c-format
 +#, c-format
- msgid "File %s grew, %<PRIuMAX> new byte not copied"
- msgid_plural "File %s grew, %<PRIuMAX> new bytes not copied"
--msgstr[0] "Plik %s powiêkszy³ siê, %ld nowych bajtów nie skopiowanych"
--msgstr[1] "Plik %s powiêkszy³ siê, %ld nowych bajtów nie skopiowanych"
--msgstr[2] "Plik %s powiêkszy³ siê, %ld nowych bajtów nie skopiowanych"
-+msgstr[0] "Plik %s powiêkszy³ siê, %<PRIuMAX> nowy bajt nie skopiowany"
-+msgstr[1] "Plik %s powiêkszy³ siê, %<PRIuMAX> nowe bajty nie skopiowane"
-+msgstr[2] "Plik %s powiêkszy³ siê, %<PRIuMAX> nowych bajtów nie skopiowanych"
+ msgid ""
+ "   GNU cpio is free software; you can redistribute it and/or modify\n"
+ "   it under the terms of the GNU General Public License as published by\n"
+@@ -562,7 +562,7 @@
+ "modyfikowaæ\n"
+ "   na warunkach Powszechnej Licencji Publicznej GNU (General Public "
+ "License)\n"
+-"   opublikowanej przez Free Software Foundation, w wersji 2, lub, do "
++"   opublikowanej przez Free Software Foundation, w wersji 3, lub, do "
+ "wyboru,\n"
+ "   dowolnej pó¼niejszej.\n"
+ "\n"
+@@ -785,9 +785,9 @@
+ msgstr "brak pamiêci wirtualnej"
  
- #: src/util.c:590
- #, c-format
-@@ -817,32 +817,32 @@
- #: lib/getopt.c:580 lib/getopt.c:584
- #, c-format
- msgid "%s: option `--%s' doesn't allow an argument\n"
--msgstr "%s: opcja `--%s' nie mo¿e mieæ argumentu\n"
-+msgstr "%s: opcja `--%s' nie mo¿e mieæ argumentów\n"
+ #: src/util.c:624
+-#, fuzzy, c-format
++#, c-format
+ msgid "Creating intermediate directory `%s'"
+-msgstr "nie mo¿na utworzyæ katalogu `%s'"
++msgstr "Tworzenie katalogu po¶redniego `%s'"
  
- #: lib/getopt.c:593 lib/getopt.c:598
+ #: src/util.c:661 src/util.c:667
  #, c-format
- msgid "%s: option `%c%s' doesn't allow an argument\n"
--msgstr "%s: opcja `%c%s' nie mo¿e mieæ argumentu\n"
-+msgstr "%s: opcja `%c%s' nie mo¿e mieæ argumentów\n"
+@@ -817,7 +817,7 @@
+ #: src/util.c:1417
+ #, c-format
+ msgid "%s: Unexpected inconsistency when making directory"
+-msgstr ""
++msgstr "%s: Nieoczekiwana niespójno¶æ podczas tworzenia katalogu"
  
- #: lib/getopt.c:641 lib/getopt.c:660 lib/getopt.c:976 lib/getopt.c:995
+ #: lib/getopt.c:531 lib/getopt.c:547
  #, c-format
- msgid "%s: option `%s' requires an argument\n"
--msgstr "%s: opcja `%s' wymaga argumentu\n"
-+msgstr "%s: opcja `%s' musi mieæ argument\n"
- 
- #: lib/getopt.c:698 lib/getopt.c:701
- #, c-format
- msgid "%s: unrecognized option `--%s'\n"
--msgstr "%s: nierozpoznana opcja `--%s'\n"
-+msgstr "%s: nieznana opcja `--%s'\n"
- 
- #: lib/getopt.c:709 lib/getopt.c:712
- #, c-format
- msgid "%s: unrecognized option `%c%s'\n"
--msgstr "%s: nierozpoznana opcja `%c%s'\n"
-+msgstr "%s: nieznana opcja `%c%s'\n"
- 
- #: lib/getopt.c:764 lib/getopt.c:767
- #, c-format
- msgid "%s: illegal option -- %c\n"
--msgstr "%s: nielegalna opcja -- %c\n"
-+msgstr "%s: niew³a¶ciwa opcja -- %c\n"
- 
- #: lib/getopt.c:773 lib/getopt.c:776
- #, c-format
-@@ -852,7 +852,7 @@
- #: lib/getopt.c:828 lib/getopt.c:844 lib/getopt.c:1048 lib/getopt.c:1066
- #, c-format
- msgid "%s: option requires an argument -- %c\n"
--msgstr "%s: opcja wymaga argumentu -- %c\n"
-+msgstr "%s: opcja musi mieæ argument -- %c\n"
- 
- #: lib/getopt.c:897 lib/getopt.c:913
- #, c-format
-@@ -862,7 +862,7 @@
- #: lib/getopt.c:937 lib/getopt.c:955
- #, c-format
- msgid "%s: option `-W %s' doesn't allow an argument\n"
--msgstr "%s: opcja `-W %s' nie mo¿e mieæ argumentu\n"
-+msgstr "%s: opcja `-W %s' nie mo¿e mieæ argumentów\n"
- 
- #: lib/rtapelib.c:299
- #, c-format
-@@ -975,12 +975,3 @@
- msgid "Substituting `.' for empty hard link target"
- msgstr ""
- "Podstawienie `.' zamiast pustej nazwy wskazywanej przez dowi±zanie zwyk³e"
--
--#~ msgid "error %d"
--#~ msgstr "b³±d %d"
--
--#~ msgid "%s: Read error at byte %s, reading %lu byte"
--#~ msgid_plural "%s: Read error at byte %s, reading %lu bytes"
--#~ msgstr[0] "%s: B³±d odczytu na bajcie %s, odczyt %lu bajtu"
--#~ msgstr[1] "%s: B³±d odczytu na bajcie %s, odczyt %lu bajtów"
--#~ msgstr[2] "%s: B³±d odczytu na bajcie %s, odczyt %lu bajtów"
