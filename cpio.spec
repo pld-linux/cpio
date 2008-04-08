@@ -12,7 +12,7 @@ Version:	2.9
 Release:	2
 License:	GPL v3+
 Group:		Applications/Archiving
-Source0:	ftp://ftp.gnu.org/gnu/cpio/%{name}-%{version}.tar.bz2
+Source0:	http://ftp.gnu.org/gnu/cpio/%{name}-%{version}.tar.bz2
 # Source0-md5:	e387abfdae3a0b9a8a5f762db653a96d
 Source1:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-non-english-man-pages.tar.bz2
 # Source1-md5:	027552f4053477462a09fadc162a5e65
