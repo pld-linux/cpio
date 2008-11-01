@@ -9,7 +9,7 @@ Summary(tr.UTF-8):	GNU cpio arşivleme programı
 Summary(uk.UTF-8):	Архівна програма GNU
 Name:		cpio
 Version:	2.9
-Release:	2
+Release:	3
 License:	GPL v3+
 Group:		Applications/Archiving
 Source0:	http://ftp.gnu.org/gnu/cpio/%{name}-%{version}.tar.bz2
@@ -108,6 +108,14 @@ cpio копіює файли в або з архіву cpio або tar, який
 %patch1 -p1
 
 rm -f po/stamp-po
+
+rm m4/extensions.m4
+sed -i -e 's#gl_USE_SYSTEM_EXTENSIONS#AC_USE_SYSTEM_EXTENSIONS#g' configure.ac m4/*.m4
+
+rm lib/argp*.h
+for f in lib/arg*.c; do
+	:> $f
+done
 
 %build
 %{__gettextize}
