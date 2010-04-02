@@ -8,20 +8,19 @@ Summary(ru.UTF-8):	Архивная программа GNU
 Summary(tr.UTF-8):	GNU cpio arşivleme programı
 Summary(uk.UTF-8):	Архівна програма GNU
 Name:		cpio
-Version:	2.9
-Release:	3
+Version:	2.11
+Release:	1
 License:	GPL v3+
 Group:		Applications/Archiving
 Source0:	http://ftp.gnu.org/gnu/cpio/%{name}-%{version}.tar.bz2
-# Source0-md5:	e387abfdae3a0b9a8a5f762db653a96d
+# Source0-md5:	20fc912915c629e809f80b96b2e75d7d
 Source1:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-non-english-man-pages.tar.bz2
 # Source1-md5:	027552f4053477462a09fadc162a5e65
 Patch0:		%{name}-info.patch
-Patch1:		%{name}-locale.patch
-Patch2:		%{name}-pl.po-update.patch
+Patch1:		%{name}-ifdef.patch
 URL:		http://www.gnu.org/software/cpio/
-BuildRequires:	autoconf >= 2.59
-BuildRequires:	automake >= 1:1.8
+BuildRequires:	autoconf >= 2.63
+BuildRequires:	automake >= 1:1.11.1
 BuildRequires:	gettext-devel >= 0.16
 BuildRequires:	texinfo
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -103,27 +102,17 @@ cpio копіює файли в або з архіву cpio або tar, який
 
 %prep
 %setup -q
-%patch2 -p1
 %patch0 -p1
 %patch1 -p1
 
-rm -f po/stamp-po
-
-rm m4/extensions.m4
-sed -i -e 's#gl_USE_SYSTEM_EXTENSIONS#AC_USE_SYSTEM_EXTENSIONS#g' configure.ac m4/*.m4
-
-rm lib/argp*.h
-for f in lib/arg*.c; do
-	:> $f
-done
-
 %build
 %{__gettextize}
-%{__aclocal} -I m4
+%{__aclocal} -I m4 -I am
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-%configure
+%configure \
+	--disable-silent-rules
 
 %{__make}
 
@@ -135,15 +124,19 @@ rm -rf $RPM_BUILD_ROOT
 
 bzip2 -dc %{SOURCE1} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
 
+# in PLD rmt is built from tar.spec
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/rmt
+%{__rm} $RPM_BUILD_ROOT%{_mandir}{,/es,/ja}/man1/mt.1*
+
 %find_lang %{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post	-p	/sbin/postshell
+%post	-p /sbin/postshell
 -/usr/sbin/fix-info-dir -c %{_infodir}
 
-%postun	-p	/sbin/postshell
+%postun	-p /sbin/postshell
 -/usr/sbin/fix-info-dir -c %{_infodir}
 
 %files -f %{name}.lang
