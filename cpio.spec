@@ -9,7 +9,7 @@ Summary(tr.UTF-8):	GNU cpio arşivleme programı
 Summary(uk.UTF-8):	Архівна програма GNU
 Name:		cpio
 Version:	2.11
-Release:	2
+Release:	3
 License:	GPL v3+
 Group:		Applications/Archiving
 Source0:	http://ftp.gnu.org/gnu/cpio/%{name}-%{version}.tar.bz2
@@ -19,6 +19,7 @@ Source1:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-non-english-ma
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-ifdef.patch
 Patch2:		%{name}-crc-is-32-bit.patch
+Patch3:		%{name}-stdio.in.patch
 URL:		http://www.gnu.org/software/cpio/
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.11.1
@@ -106,6 +107,7 @@ cpio копіює файли в або з архіву cpio або tar, який
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 %{__gettextize}
