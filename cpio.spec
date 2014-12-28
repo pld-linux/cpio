@@ -23,7 +23,7 @@ Patch3:		%{name}-stdio.in.patch
 URL:		http://www.gnu.org/software/cpio/
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.11.1
-BuildRequires:	gettext-devel >= 0.16
+BuildRequires:	gettext-tools >= 0.16
 BuildRequires:	texinfo
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
