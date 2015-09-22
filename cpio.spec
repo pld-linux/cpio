@@ -8,22 +8,20 @@ Summary(ru.UTF-8):	Архивная программа GNU
 Summary(tr.UTF-8):	GNU cpio arşivleme programı
 Summary(uk.UTF-8):	Архівна програма GNU
 Name:		cpio
-Version:	2.11
-Release:	4
+Version:	2.12
+Release:	1
 License:	GPL v3+
 Group:		Applications/Archiving
 Source0:	http://ftp.gnu.org/gnu/cpio/%{name}-%{version}.tar.bz2
-# Source0-md5:	20fc912915c629e809f80b96b2e75d7d
+# Source0-md5:	93eea9f07c0058c097891c73e4955456
 Source1:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-non-english-man-pages.tar.bz2
 # Source1-md5:	027552f4053477462a09fadc162a5e65
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-ifdef.patch
-Patch2:		%{name}-crc-is-32-bit.patch
-Patch3:		%{name}-stdio.in.patch
 URL:		http://www.gnu.org/software/cpio/
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.11.1
-BuildRequires:	gettext-tools >= 0.16
+BuildRequires:	gettext-tools >= 0.19
 BuildRequires:	texinfo
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -106,8 +104,6 @@ cpio копіює файли в або з архіву cpio або tar, який
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
-%patch3 -p1
 
 %build
 %{__gettextize}
@@ -127,10 +123,12 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 bzip2 -dc %{SOURCE1} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
+%{__rm} $RPM_BUILD_ROOT%{_mandir}/README.cpio-non-english-man-pages
 
 # in PLD rmt is built from tar.spec
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/rmt
-%{__rm} $RPM_BUILD_ROOT%{_mandir}{,/es,/ja}/man1/mt.1*
+%{__rm} $RPM_BUILD_ROOT%{_mandir}/man8/rmt.8*
+%{__rm} $RPM_BUILD_ROOT%{_mandir}/{es,ja}/man1/mt.1*
 
 %find_lang %{name}
 
