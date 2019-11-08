@@ -9,7 +9,7 @@ Summary(tr.UTF-8):	GNU cpio arşivleme programı
 Summary(uk.UTF-8):	Архівна програма GNU
 Name:		cpio
 Version:	2.13
-Release:	1
+Release:	2
 License:	GPL v3+
 Group:		Applications/Archiving
 Source0:	https://ftp.gnu.org/gnu/cpio/%{name}-%{version}.tar.bz2
@@ -126,7 +126,7 @@ bzip2 -dc %{SOURCE1} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
 %{__rm} $RPM_BUILD_ROOT%{_mandir}/README.cpio-non-english-man-pages
 
 # in PLD rmt is built from tar.spec
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/rmt
+%{__rm} $RPM_BUILD_ROOT%{_libexecdir}/rmt
 %{__rm} $RPM_BUILD_ROOT%{_mandir}/man8/rmt.8*
 %{__rm} $RPM_BUILD_ROOT%{_mandir}/{es,ja}/man1/mt.1*
 
