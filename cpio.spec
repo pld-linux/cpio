@@ -19,6 +19,7 @@ Source1:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-non-english-ma
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-ifdef.patch
 Patch2:		revert-CVE-2015-1197-fix.patch
+Patch3:		gcc10.patch
 URL:		http://www.gnu.org/software/cpio/
 BuildRequires:	autoconf >= 2.63
 BuildRequires:	automake >= 1:1.11.1
@@ -106,6 +107,7 @@ cpio копіює файли в або з архіву cpio або tar, який
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 %{__gettextize}
