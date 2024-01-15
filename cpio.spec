@@ -8,12 +8,12 @@ Summary(ru.UTF-8):	Архивная программа GNU
 Summary(tr.UTF-8):	GNU cpio arşivleme programı
 Summary(uk.UTF-8):	Архівна програма GNU
 Name:		cpio
-Version:	2.14
+Version:	2.15
 Release:	1
 License:	GPL v3+
 Group:		Applications/Archiving
 Source0:	https://ftp.gnu.org/gnu/cpio/%{name}-%{version}.tar.bz2
-# Source0-md5:	b153e1843561841d37190e48b891188d
+# Source0-md5:	3394d444ca1905ea56c94b628b706a0b
 Source1:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-non-english-man-pages.tar.bz2
 # Source1-md5:	027552f4053477462a09fadc162a5e65
 Patch0:		%{name}-info.patch
